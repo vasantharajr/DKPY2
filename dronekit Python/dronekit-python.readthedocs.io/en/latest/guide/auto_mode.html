@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/guide/auto_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:38 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+		<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+	
+		<link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+	
+
+	<link rel="stylesheet" href="../_static/css/style.css" />
+	<script src="../_static/js/modernizr.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+
+	
+		<title>Missions (AUTO Mode)</title>
+	
+
+	<script type="text/javascript">
+		var DOCUMENTATION_OPTIONS = {
+			URL_ROOT: '',
+			VERSION: '2.4.0',
+			COLLAPSE_INDEX: false,
+			FILE_SUFFIX: '.html',
+			HAS_SOURCE: true
+		};
+	</script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="auto_mode.html" />
+
+<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="../_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "guide/auto_mode"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="../../../../assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+<body>
+	<nav id="topnav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed icon-facebook-sign" type="button" data-toggle="collapse" data-target="#collapsable-topnav">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="http://dronekit.io/">
+					<img src="../_static/images/new-DK-logo-color.svg" alt="3DR">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="collapsable-topnav">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://cloud.dronekit.io/" class="cloud">Cloud</a>
+					</li>
+					<li>
+						<a href="http://python.dronekit.io/" class="air">Python</a>
+					</li>
+					<li>
+						<a href="http://android.dronekit.io/" class="ground">Android</a>
+					</li>
+					<li>
+						<a href="http://dronekit.io/support" class="support">Support</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row gray-bg">
+			<div class="col-sm-3 col-md-2 col-sidebar">
+
+        
+					
+	<div id="sidebar-search" role="search">
+		<form id="rtd-search-form" class="form-inline" action="https://dronekit-python.readthedocs.io/en/latest/search.html" method="get">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input class="form-control" type="text" name="q" placeholder="Search..." />
+			</div>
+			<input type="hidden" name="check_keywords" value="yes" />
+			<input type="hidden" name="area" value="default" />
+		</form>
+	</div>
+        
+				<div id="gray-sidebar" class="container-fluid">
+	        
+	          
+	          
+	              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about/overview.html">About DroneKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#open-source-community">Open source community</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#api-features">API features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/release_notes.html">Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#latest-release">Latest release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#changelog">Changelog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-1-2017-04-21">Version 2.9.1 (2017-04-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-0-2016-08-29">Version 2.9.0 (2016-08-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-8-0-2016-07-15">Version 2.8.0 (2016-07-15)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-7-0-2016-06-21">Version 2.7.0 (2016-06-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-6-0-2016-06-17">Version 2.6.0 (2016-06-17)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-5-0-2016-05-04">Version 2.5.0 (2016-05-04)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-4-0-2016-02-29">Version 2.4.0 (2016-02-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-3-0-2016-02-26">Version 2.3.0 (2016-02-26)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-2-0-2016-02-19">Version 2.2.0 (2016-02-19)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-1-0-2016-02-16">Version 2.1.0 (2016-02-16)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-2-2015-11-30">Version 2.0.2 (2015-11-30)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-0-2015-11-23">Version 2.0.0 (2015-11-23)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#all-releases">All releases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#working-with-releases">Working with releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/migrating.html">Migrating to DKPY 2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#code-changes">Code changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connecting-to-a-vehicle">Connecting to a vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connection-status-checks">Connection status checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#script-completion-checks">Script completion checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#command-line-arguments">Command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#current-script-directory">Current script directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#vehicle-location">Vehicle.location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#takeoff-and-movement-commands">Takeoff and movement commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#home-location">Home location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#missions-and-waypoints">Missions and Waypoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#parameter-changes">Parameter changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#intercepting-mavlink-messages">Intercepting MAVLink Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#new-attributes">New attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#channel-overrides">Channel Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/license.html">Open Source Licence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#basic-hello-drone">Basic “Hello Drone”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/index.html">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop/installation.html">Installing DroneKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/companion-computers.html">Companion Computers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#raspberrypi">RaspberryPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#intel-edison">Intel Edison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#beagleboneblack">BeagleBoneBlack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#odroid">Odroid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/sitl_setup.html">Simulated Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl">DroneKit-SITL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#running-sitl">Running SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#connecting-to-dronekit-sitl">Connecting to DroneKit-SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl-python-api">DroneKit-SITL Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#building-sitl-from-source">Building SITL from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#connecting-an-additional-ground-station">Connecting an additional Ground Station</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/best_practice.html">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#general-considerations">General considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#connecting">Connecting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launch-sequence">Launch sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#movement-commands">Movement commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#vehicle-information">Vehicle information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#missions-and-waypoints">Missions and waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#monitor-and-react-to-state-changes">Monitor and react to state changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#sleep-the-script-when-not-needed">Sleep the script when not needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#exiting-a-script">Exiting a script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#subclass-vehicle">Subclass Vehicle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#current-script-directory">Current script directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/coding_standards.html">Coding Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="connecting_vehicle.html">Connecting to a Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="connecting_vehicle.html#get-started-connect-string">Connection string options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connecting_vehicle.html#connecting-to-multiple-vehicles">Connecting to multiple vehicles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="vehicle_state_and_parameters.html">Vehicle State and Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vehicle_state_and_parameters.html#attributes">Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#getting-attributes">Getting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#setting-attributes">Setting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#home-location">Home location</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vehicle_state_and_parameters.html#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#getting-parameters">Getting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#setting-parameters">Setting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#listing-all-parameters">Listing all parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="vehicle_state_and_parameters.html#observing-parameter-changes">Observing parameter changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vehicle_state_and_parameters.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="taking_off.html">Taking Off</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copter/guided_mode.html">Guiding and Controlling Copter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#controlling-vehicle-movement">Controlling vehicle movement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#position-control">Position control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#velocity-control">Velocity control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#acceleration-and-force-control">Acceleration and force control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#guided-mode-commands">Guided mode commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#sending-messages-commands">Sending messages/commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#supported-commands">Supported commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#setting-the-yaw">Setting the Yaw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#setting-the-roi">Setting the ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#command-acknowledgements-and-response-values">Command acknowledgements and response values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#frame-conversion-functions">Frame conversion functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#other-information">Other information</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Missions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mission-command-overview">Mission Command Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-current-mission">Download current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clearing-current-mission">Clearing current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-adding-mission-commands">Creating/adding mission commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modifying-missions">Modifying missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-and-monitoring-missions">Running and monitoring missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-the-end-of-a-mission">Handling the end of a mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#useful-mission-functions">Useful Mission functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#load-a-mission-from-a-file">Load a mission from a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-a-mission-to-a-file">Save a mission to a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-distance-to-waypoint">Get distance to waypoint</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#useful-links">Useful Links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#pdb-the-python-debugger">pdb - The Python Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#pudb-a-full-screen-console-based-python-debugger">pudb - A full-screen, console-based Python debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#print-log-statements">Print/log statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#other-ides-debuggers">Other IDEs/debuggers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mavlink_messages.html">MAVLink Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mavlink_messages.html#creating-a-message-listener">Creating a message listener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mavlink_messages.html#watching-all-messages">Watching all messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mavlink_messages.html#removing-an-observer">Removing an observer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/running_examples.html">Running the Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/vehicle_state.html">Vehicle State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/simple_goto.html">Simple Goto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#takeoff">Takeoff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#flying-to-a-point-simple-goto">Flying to a point - simple_goto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#rtl-return-to-launch">RTL - Return to launch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html">Guided Movement and Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-convenience-function">goto() - convenience function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#send-ned-velocity">send_ned_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#send-global-velocity">send_global_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-position-target-global-int">goto_position_target_global_int()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-position-target-local-ned">goto_position_target_local_ned()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#testbed-settings">Testbed settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/mission_basic.html">Basic Mission</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/mission_import_export.html">Mission Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/create_attribute.html">Create Attribute in App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/create_attribute.html#subclassing-vehicle">Subclassing Vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/create_attribute.html#using-the-vehicle-subclass">Using the Vehicle subclass</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/follow_me.html">Follow Me (Linux only)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/drone_delivery.html">Drone Delivery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#screenshots">Screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/drone_delivery.html#using-attribute-observers">Using attribute observers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/drone_delivery.html#starting-cherrypy-from-a-dronekit-application">Starting CherryPy from a DroneKit application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/flight_replay.html">Flight Replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/flight_replay.html#getting-the-points">Getting the points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/flight_replay.html#setting-the-new-waypoints">Setting the new waypoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/channel_overrides.html">Channel Overrides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#source-code">Source code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/getting_started.html">How you can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_api.html">Contributing to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#test-code">Test code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#setting-up-local-testing">Setting up local testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#integration-tests">Integration tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_documentation.html">Contributing to the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#documentation-system-overview">Documentation system overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#building-the-docs">Building the docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_windows.html">Building DroneKit-Python on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#install-dronekit-using-winpython-command-line">Install DroneKit using WinPython command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_linux.html">Building DroneKit-Python on Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../automodule.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference external" href="http://python.dronekit.io/genindex.html">Index</a></li>
+</ul>
+</li>
+</ul>
+
+	          
+	        
+				</div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="api-content">
+					
+  <div class="section" id="missions-auto-mode">
+<span id="auto-mode-vehicle-control"></span><h1>Missions (AUTO Mode)<a class="headerlink" href="#missions-auto-mode" title="Permalink to this headline">¶</a></h1>
+<p>AUTO mode is used run pre-defined waypoint missions on Copter, Plane and Rover.</p>
+<p>DroneKit-Python provides basic methods to download and clear the current mission commands
+from the vehicle, to add and upload new mission commands, to count the number of waypoints,
+and to read and set the currently executed mission command.
+You can build upon these basic primitives to create high-level mission planning functionality.</p>
+<p>This section shows how to use the basic methods and provides a few useful helper functions.
+Most of the code can be observed running in <a class="reference internal" href="../examples/mission_basic.html#example-mission-basic"><span class="std std-ref">Example: Basic Mission</span></a> and <a class="reference internal" href="../examples/mission_import_export.html#example-mission-import-export"><span class="std std-ref">Example: Mission Import/Export</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>We recommend that you <a class="reference internal" href="copter/guided_mode.html#guided-mode-copter"><span class="std std-ref">use GUIDED mode</span></a> instead of AUTO mode where possible, because it offers finer
+and more responsive control over movement, and can emulate most mission planning activities.</p>
+<p class="last">AUTO mode can be helpful if a command you need is not supported in GUIDED mode on a particular vehicle type.</p>
+</div>
+<div class="section" id="mission-command-overview">
+<span id="auto-mode-supported-commands"></span><h2>Mission Command Overview<a class="headerlink" href="#mission-command-overview" title="Permalink to this headline">¶</a></h2>
+<p>The mission commands (e.g. <code class="docutils literal notranslate"><span class="pre">MAV_CMD_NAV_TAKEOFF</span></code>, <code class="docutils literal notranslate"><span class="pre">MAV_CMD_NAV_WAYPOINT</span></code> ) supported for each vehicle type are listed here:
+<a class="reference external" href="http://copter.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd/#commands_supported_by_copter">Copter</a>,
+<a class="reference external" href="http://plane.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd/#commands_supported_by_plane">Plane</a>,
+<a class="reference external" href="http://rover.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd/#commands_supported_by_rover">Rover</a>.</p>
+<p>There are three types of commands:</p>
+<ul class="simple">
+<li><em>NAVigation commands</em> (<code class="docutils literal notranslate"><span class="pre">MAV_CMD_NAV_*</span></code>) are used to control vehicle movement,
+including takeoff, moving to and around waypoints, changing altitude, and landing.</li>
+<li><em>DO commands</em> (<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_*</span></code>) are for auxiliary functions that do not affect the vehicle’s position
+(for example, setting the camera trigger distance, or setting a servo value).</li>
+<li><em>CONDITION commands</em> (<code class="docutils literal notranslate"><span class="pre">MAV_CMD_NAV_*</span></code>) are used to delay <em>DO commands</em> until some condition is met.
+For example <code class="docutils literal notranslate"><span class="pre">MAV_CMD_CONDITION_DISTANCE</span></code> will prevent DO commands executing until the vehicle
+reaches the specified distance from the waypoint.</li>
+</ul>
+<p>During a mission at most one <em>NAV</em> command and one <em>DO</em> or <em>CONDITION</em> command can be running <strong>at the same time</strong>.
+<em>CONDITION</em> and <em>DO</em> commands are associated with the last <em>NAV</em> command that was sent: if the UAV reaches the waypoint before these
+commands are executed, the next <em>NAV</em> command is loaded and they will be skipped.</p>
+<p>The <a class="reference external" href="http://planner.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd">MAVLink Mission Command Messages (MAV_CMD)</a>
+wiki topic provides a more detailed overview of commands.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>If the autopilot receives a command that it cannot handle, then the command will be (silently) dropped.</li>
+<li>You cannot yet determine dynamically what commands are supported. We hope to deliver this functionality in
+the forthcoming <a class="reference external" href="https://github.com/dronekit/dronekit-python/issues/250">capability API</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="download-current-mission">
+<span id="auto-mode-download-mission"></span><h2>Download current mission<a class="headerlink" href="#download-current-mission" title="Permalink to this headline">¶</a></h2>
+<p>The mission commands for a vehicle are accessed using the <a class="reference internal" href="../automodule.html#dronekit.Vehicle.commands" title="dronekit.Vehicle.commands"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.commands</span></code></a>
+attribute. The attribute is of type <a class="reference internal" href="../automodule.html#dronekit.CommandSequence" title="dronekit.CommandSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommandSequence</span></code></a>, a class that provides ‘array style’ indexed access to the
+waypoints which make up the mission.</p>
+<p>Waypoints are not downloaded from vehicle until <a class="reference internal" href="../automodule.html#dronekit.CommandSequence.download" title="dronekit.CommandSequence.download"><code class="xref py py-func docutils literal notranslate"><span class="pre">download()</span></code></a> is called. The download is asynchronous;
+use <a class="reference internal" href="../automodule.html#dronekit.CommandSequence.wait_ready" title="dronekit.CommandSequence.wait_ready"><code class="xref py py-func docutils literal notranslate"><span class="pre">wait_ready()</span></code></a> to block your thread until the download is complete:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to the Vehicle (in this case a simulated vehicle at 127.0.0.1:14550)</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s1">&#39;127.0.0.1:14550&#39;</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Download the vehicle waypoints (commands). Wait until download is complete.</span>
+<span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In DroneKit-Python 2 <a class="reference internal" href="../automodule.html#dronekit.Vehicle.commands" title="dronekit.Vehicle.commands"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.commands</span></code></a> contains just the editable waypoints (in version 1.x, the
+commands included the non-editable home location as the first item).</p>
+</div>
+</div>
+<div class="section" id="clearing-current-mission">
+<span id="auto-mode-clear-mission"></span><h2>Clearing current mission<a class="headerlink" href="#clearing-current-mission" title="Permalink to this headline">¶</a></h2>
+<p>To clear a mission you call <a class="reference internal" href="../automodule.html#dronekit.CommandSequence.clear" title="dronekit.CommandSequence.clear"><code class="xref py py-func docutils literal notranslate"><span class="pre">clear()</span></code></a> and then
+<code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.commands.upload()</span></code> (to upload the changes to the vehicle):</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to the Vehicle (in this case a simulated vehicle at 127.0.0.1:14550)</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s1">&#39;127.0.0.1:14550&#39;</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Get commands object from Vehicle.</span>
+<span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+
+<span class="c1"># Call clear() on Vehicle.commands and upload the command to the vehicle.</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If a mission that is underway is cleared, the mission will continue to the next waypoint. If you don’t add a new command
+before the waypoint is reached then the vehicle mode will change to RTL (return to launch) mode.</p>
+</div>
+</div>
+<div class="section" id="creating-adding-mission-commands">
+<span id="auto-mode-adding-command"></span><h2>Creating/adding mission commands<a class="headerlink" href="#creating-adding-mission-commands" title="Permalink to this headline">¶</a></h2>
+<p>After <a class="reference internal" href="#auto-mode-download-mission"><span class="std std-ref">downloading</span></a> or <a class="reference internal" href="#auto-mode-clear-mission"><span class="std std-ref">clearing</span></a> a mission new commands
+can be added and uploaded to the vehicle. Commands are added to the mission using <a class="reference internal" href="../automodule.html#dronekit.CommandSequence.add" title="dronekit.CommandSequence.add"><code class="xref py py-func docutils literal notranslate"><span class="pre">add()</span></code></a>
+and are sent to the vehicle (either individually or in batches) using <code class="xref py py-func docutils literal notranslate"><span class="pre">upload()</span></code>.</p>
+<p>Each command is packaged in a <a class="reference internal" href="../automodule.html#dronekit.Command" title="dronekit.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code></a> object (see that class for the order/meaning of the parameters).
+The supported commands for each vehicle are <a class="reference internal" href="#auto-mode-supported-commands"><span class="std std-ref">linked above</span></a>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to the Vehicle (in this case a simulated vehicle at 127.0.0.1:14550)</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s1">&#39;127.0.0.1:14550&#39;</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Get the set of commands from the vehicle</span>
+<span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+
+<span class="c1"># Create and add commands</span>
+<span class="n">cmd1</span><span class="o">=</span><span class="n">Command</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_FRAME_GLOBAL_RELATIVE_ALT</span><span class="p">,</span> <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_CMD_NAV_TAKEOFF</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">cmd2</span><span class="o">=</span><span class="n">Command</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_FRAME_GLOBAL_RELATIVE_ALT</span><span class="p">,</span> <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_CMD_NAV_WAYPOINT</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cmd1</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cmd2</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span> <span class="c1"># Send commands</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modifying-missions">
+<span id="auto-mode-modify-mission"></span><h2>Modifying missions<a class="headerlink" href="#modifying-missions" title="Permalink to this headline">¶</a></h2>
+<p>While you can <a class="reference internal" href="#auto-mode-adding-command"><span class="std std-ref">add new commands</span></a> after <a class="reference internal" href="#auto-mode-download-mission"><span class="std std-ref">downloading a mission</span></a>
+it is not possible to directly modify and upload existing commands in <code class="docutils literal notranslate"><span class="pre">Vehicle.commands</span></code> (you can modify the commands but
+changes do not propagate to the vehicle).</p>
+<p>Instead you copy all the commands into another container (e.g. a list),
+modify them as needed, then clear <code class="docutils literal notranslate"><span class="pre">Vehicle.commands</span></code> and upload the list as a new mission:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to the Vehicle (in this case a simulated vehicle at 127.0.0.1:14550)</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s1">&#39;127.0.0.1:14550&#39;</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Get the set of commands from the vehicle</span>
+<span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+
+<span class="c1"># Save the vehicle commands to a list</span>
+<span class="n">missionlist</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+    <span class="n">missionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+<span class="c1"># Modify the mission as needed. For example, here we change the</span>
+<span class="c1"># first waypoint into a MAV_CMD_NAV_TAKEOFF command.</span>
+<span class="n">missionlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">command</span><span class="o">=</span><span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_CMD_NAV_TAKEOFF</span>
+
+<span class="c1"># Clear the current mission (command is sent when we call upload())</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+<span class="c1">#Write the modified mission and flush to the vehicle</span>
+<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">missionlist</span><span class="p">:</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The changes are not guaranteed to be complete until
+<code class="xref py py-func docutils literal notranslate"><span class="pre">upload()</span></code> is called on the parent <code class="docutils literal notranslate"><span class="pre">Vehicle.commands</span></code> object.</p>
+</div>
+<div class="section" id="running-and-monitoring-missions">
+<span id="auto-mode-monitoring-controlling"></span><h2>Running and monitoring missions<a class="headerlink" href="#running-and-monitoring-missions" title="Permalink to this headline">¶</a></h2>
+<p>To start a mission, change the mode to AUTO:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to the Vehicle (in this case a simulated vehicle at 127.0.0.1:14550)</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s1">&#39;127.0.0.1:14550&#39;</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Set the vehicle into auto mode</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">VehicleMode</span><span class="p">(</span><span class="s2">&quot;AUTO&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If the vehicle is in the air, then changing the mode to AUTO is all that is required to start the
+mission.</p>
+<p class="last"><strong>Copter 3.3 release and later:</strong> If the vehicle is on the ground (only), you will additionally need to send the
+<a class="reference external" href="http://copter.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_mission_start">MAV_CMD_MISSION_START</a>
+command.</p>
+</div>
+<p>You can stop/pause the current mission by switching out of AUTO mode (e.g. into GUIDED mode). If you switch back to
+AUTO mode the mission will either restart at the beginning or resume at the current waypoint - the behaviour depends on the value of the
+<a class="reference external" href="http://copter.ardupilot.com/wiki/arducopter-parameters/#mission_restart_when_entering_auto_mode_mis_restart">MIS_RESTART</a>
+parameter (available on all vehicle types).</p>
+<p>You can monitor the progress of the mission by polling the <a class="reference internal" href="../automodule.html#dronekit.CommandSequence.next" title="dronekit.CommandSequence.next"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.commands.next</span></code></a> attribute
+to get the current command number. You can also change the current command by setting the attribute to the desired command number.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="mi">2</span>
+<span class="nb">print</span> <span class="s2">&quot;Current Waypoint: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">next</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">next</span><span class="o">=</span><span class="mi">4</span>
+<span class="nb">print</span> <span class="s2">&quot;Current Waypoint: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+</div>
+<p>There is no need to <code class="docutils literal notranslate"><span class="pre">upload()</span></code> changes to send an update to the  <code class="docutils literal notranslate"><span class="pre">next</span></code> attribute to the vehicle
+(and as with other attributes, if you fetch a value, it is updated from the vehicle).</p>
+</div>
+<div class="section" id="handling-the-end-of-a-mission">
+<span id="auto-mode-handle-mission-end"></span><h2>Handling the end of a mission<a class="headerlink" href="#handling-the-end-of-a-mission" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the mission the vehicle will enter LOITER mode (hover in place for Copter,
+circle for Plane, stop for Rover). You can add new commands to the mission, but you will need to toggle from/back to
+AUTO mode to start it running again.</p>
+<p>Currently there is no notification in DroneKit when a mission completes. If you need to detect mission end (in order
+to perform some other operation) then you can either:</p>
+<ul class="simple">
+<li>Add a dummy mission command and poll <a class="reference internal" href="../automodule.html#dronekit.CommandSequence.next" title="dronekit.CommandSequence.next"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.commands.next</span></code></a> for the
+transition to the final command, or</li>
+<li>Compare the current position to the target position in the final waypoint.</li>
+</ul>
+</div>
+<div class="section" id="useful-mission-functions">
+<span id="auto-mode-useful-functions"></span><h2>Useful Mission functions<a class="headerlink" href="#useful-mission-functions" title="Permalink to this headline">¶</a></h2>
+<p>This example code contains a number of functions that might be useful for managing and monitoring missions:</p>
+<div class="section" id="load-a-mission-from-a-file">
+<span id="auto-mode-load-mission-file"></span><h3>Load a mission from a file<a class="headerlink" href="#load-a-mission-from-a-file" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">upload_mission()</span></code> uploads a mission from a file.</p>
+<p>The implementation calls <code class="docutils literal notranslate"><span class="pre">readmission()</span></code> (below) to import the mission from a file into a list. The method then
+clears the existing mission and uploads the new version.</p>
+<p>Adding mission commands is discussed <a class="reference internal" href="#auto-mode-adding-command"><span class="std std-ref">here in the guide</span></a>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">upload_mission</span><span class="p">(</span><span class="n">aFileName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Upload a mission from a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#Read mission from file</span>
+        <span class="n">missionlist</span> <span class="o">=</span> <span class="n">readmission</span><span class="p">(</span><span class="n">aFileName</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Upload mission from a file: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">import_mission_filename</span>
+        <span class="c1">#Clear existing mission from vehicle</span>
+        <span class="nb">print</span> <span class="s1">&#39; Clear mission&#39;</span>
+        <span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+        <span class="n">cmds</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="c1">#Add new mission to vehicle</span>
+        <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">missionlist</span><span class="p">:</span>
+            <span class="n">cmds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="s1">&#39; Upload mission&#39;</span>
+        <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">readmission()</span></code> reads a mission from the specified file and returns a list of <a class="reference internal" href="../automodule.html#dronekit.Command" title="dronekit.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code></a> objects.</p>
+<p>Each line is split up. The first line is used to test whether the file has the correct (stated) format.
+For subsequent lines the values are stored in a <a class="reference internal" href="../automodule.html#dronekit.Command" title="dronekit.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code></a> object
+(the values are first cast to the correct <code class="docutils literal notranslate"><span class="pre">float</span></code> and <code class="docutils literal notranslate"><span class="pre">int</span></code> types for their associated parameters).
+The commands are added to a list which is returned by the function.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">readmission</span><span class="p">(</span><span class="n">aFileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load a mission from a file into a list.</span>
+
+<span class="sd">    This function is used by upload_mission().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span> <span class="s2">&quot;Reading mission from file: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">aFileName</span>
+    <span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+    <span class="n">missionlist</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">aFileName</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;QGC WPL 110&#39;</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;File is not supported WP version&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">linearray</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">ln_index</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">ln_currentwp</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">ln_frame</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">ln_command</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">ln_param1</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                <span class="n">ln_param2</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">ln_param3</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+                <span class="n">ln_param4</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+                <span class="n">ln_param5</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+                <span class="n">ln_param6</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+                <span class="n">ln_param7</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+                <span class="n">ln_autocontinue</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">linearray</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="n">cmd</span> <span class="o">=</span> <span class="n">Command</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ln_frame</span><span class="p">,</span> <span class="n">ln_command</span><span class="p">,</span> <span class="n">ln_currentwp</span><span class="p">,</span> <span class="n">ln_autocontinue</span><span class="p">,</span> <span class="n">ln_param1</span><span class="p">,</span> <span class="n">ln_param2</span><span class="p">,</span> <span class="n">ln_param3</span><span class="p">,</span> <span class="n">ln_param4</span><span class="p">,</span> <span class="n">ln_param5</span><span class="p">,</span> <span class="n">ln_param6</span><span class="p">,</span> <span class="n">ln_param7</span><span class="p">)</span>
+                <span class="n">missionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missionlist</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="save-a-mission-to-a-file">
+<span id="auto-mode-save-mission-file"></span><h3>Save a mission to a file<a class="headerlink" href="#save-a-mission-to-a-file" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">save_mission()</span></code> saves the current mission to a file (in the <a class="reference external" href="http://qgroundcontrol.org/mavlink/waypoint_protocol#waypoint_file_format">Waypoint file format</a>).
+It uses <code class="docutils literal notranslate"><span class="pre">download_mission()</span></code> (below) to get them mission, and then writes the list line-by-line to the file.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">save_mission</span><span class="p">(</span><span class="n">aFileName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save a mission in the Waypoint file format (http://qgroundcontrol.org/mavlink/waypoint_protocol#waypoint_file_format).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">missionlist</span> <span class="o">=</span> <span class="n">download_mission</span><span class="p">()</span>
+    <span class="n">output</span><span class="o">=</span><span class="s1">&#39;QGC WPL 110</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">missionlist</span><span class="p">:</span>
+        <span class="n">commandline</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cmd</span><span class="o">.</span><span class="n">seq</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">current</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">command</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">param1</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">param2</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">param3</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">param4</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">x</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">y</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="n">cmd</span><span class="o">.</span><span class="n">autocontinue</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">+=</span><span class="n">commandline</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">aFileName</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_</span><span class="p">:</span>
+        <span class="n">file_</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">download_mission()</span></code> downloads the <a class="reference internal" href="../automodule.html#dronekit.Vehicle.commands" title="dronekit.Vehicle.commands"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.commands</span></code></a> from the vehicle and
+adds them to a list. Downloading mission is discussed <a class="reference internal" href="#auto-mode-download-mission"><span class="std std-ref">in the guide</span></a>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">download_mission</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Downloads the current mission and returns it in a list.</span>
+<span class="sd">    It is used in save_mission() to get the file information to save.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">missionlist</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+        <span class="n">missionlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">missionlist</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-distance-to-waypoint">
+<span id="auto-mode-mission-distance-to-waypoint"></span><h3>Get distance to waypoint<a class="headerlink" href="#get-distance-to-waypoint" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">distance_to_current_waypoint()</span></code> returns the distance (in metres) to the next waypoint:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">distance_to_current_waypoint</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets distance in metres to the current waypoint.</span>
+<span class="sd">    It returns None for the first waypoint (Home location).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nextwaypoint</span><span class="o">=</span><span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">if</span> <span class="n">nextwaypoint</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">missionitem</span><span class="o">=</span><span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span><span class="p">[</span><span class="n">nextwaypoint</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#commands are zero indexed</span>
+    <span class="n">lat</span><span class="o">=</span><span class="n">missionitem</span><span class="o">.</span><span class="n">x</span>
+    <span class="n">lon</span><span class="o">=</span><span class="n">missionitem</span><span class="o">.</span><span class="n">y</span>
+    <span class="n">alt</span><span class="o">=</span><span class="n">missionitem</span><span class="o">.</span><span class="n">z</span>
+    <span class="n">targetWaypointLocation</span><span class="o">=</span><span class="n">LocationGlobalRelative</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">,</span><span class="n">alt</span><span class="p">)</span>
+    <span class="n">distancetopoint</span> <span class="o">=</span> <span class="n">get_distance_metres</span><span class="p">(</span><span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">global_frame</span><span class="p">,</span> <span class="n">targetWaypointLocation</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">distancetopoint</span>
+</pre></div>
+</div>
+<p>The function determines the current target waypoint number with <a class="reference internal" href="../automodule.html#dronekit.CommandSequence.next" title="dronekit.CommandSequence.next"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.commands.next</span></code></a>
+and uses it to index the commands to get the latitude, longitude and altitude of the target waypoint. The <code class="docutils literal notranslate"><span class="pre">get_distance_metres()</span></code> function
+(see <a class="reference internal" href="copter/guided_mode.html#guided-mode-copter-useful-conversion-functions"><span class="std std-ref">Frame conversion functions</span></a>) is then used to calculate and return the (horizontal) distance
+from the current vehicle location.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">This implementation is very basic. It assumes that the next command number is for a valid NAV command (it might not be)
+and that the lat/lon/alt values are non-zero. It is however a useful indicator for test code.</p>
+</div>
+</div>
+</div>
+<div class="section" id="useful-links">
+<span id="auto-mode-mission-useful-links"></span><h2>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://planner.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd">MAVLink mission command messages</a> (all vehicle types - wiki).</li>
+</ul>
+</div>
+</div>
+
+
+					<footer id="footer">
+						
+	<div class="footer-buttons" role="navigation" aria-label="footer navigation">
+		
+			<a href="debugging.html" class="btn btn-default pull-right" title="Debugging">
+				Next <span class="fa fa-arrow-circle-right"></span>
+			</a>
+		
+		
+			<a href="copter/guided_mode.html" class="btn btn-default" title="Guiding and Controlling Copter">
+				<span class="fa fa-arrow-circle-left"></span> Previous
+			</a>
+		
+	</div>
+
+
+<hr/>
+
+<div role="contentinfo">
+	<p>
+				&copy; Copyright 2015-2016, 3D Robotics.
+	</p>
+</div>
+Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/3drobotics/sphinx_3dr_theme">theme</a> provided by <a href="https://3drobotics.com/">3D Robotics</a> for <a href="http://dronekit.io/">DroneKit</a>.
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+		<script type="text/javascript" src="../_static/js/jquery.js"></script>
+		<script type="text/javascript" src="../_static/js/scroll.js"></script>
+		<script type="text/javascript" src="../_static/underscore.js"></script>
+		<script type="text/javascript" src="../_static/doctools.js"></script>
+		<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../_static/js/cool-select.js"></script>
+		<script type="text/javascript" src="../_static/searchtools.js"></script>
+	
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-39974306-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/guide/auto_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:38 GMT -->
+</html>

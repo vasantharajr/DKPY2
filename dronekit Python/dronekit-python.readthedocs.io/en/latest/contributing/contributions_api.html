@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/contributing/contributions_api.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:47 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+		<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+	
+		<link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+	
+
+	<link rel="stylesheet" href="../_static/css/style.css" />
+	<script src="../_static/js/modernizr.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+
+	
+		<title>Contributing to the API</title>
+	
+
+	<script type="text/javascript">
+		var DOCUMENTATION_OPTIONS = {
+			URL_ROOT: '',
+			VERSION: '2.4.0',
+			COLLAPSE_INDEX: false,
+			FILE_SUFFIX: '.html',
+			HAS_SOURCE: true
+		};
+	</script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="contributions_api.html" />
+
+<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="../_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "contributing/contributions_api"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="../../../../assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+<body>
+	<nav id="topnav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed icon-facebook-sign" type="button" data-toggle="collapse" data-target="#collapsable-topnav">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="http://dronekit.io/">
+					<img src="../_static/images/new-DK-logo-color.svg" alt="3DR">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="collapsable-topnav">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://cloud.dronekit.io/" class="cloud">Cloud</a>
+					</li>
+					<li>
+						<a href="http://python.dronekit.io/" class="air">Python</a>
+					</li>
+					<li>
+						<a href="http://android.dronekit.io/" class="ground">Android</a>
+					</li>
+					<li>
+						<a href="http://dronekit.io/support" class="support">Support</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row gray-bg">
+			<div class="col-sm-3 col-md-2 col-sidebar">
+
+        
+					
+	<div id="sidebar-search" role="search">
+		<form id="rtd-search-form" class="form-inline" action="https://dronekit-python.readthedocs.io/en/latest/search.html" method="get">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input class="form-control" type="text" name="q" placeholder="Search..." />
+			</div>
+			<input type="hidden" name="check_keywords" value="yes" />
+			<input type="hidden" name="area" value="default" />
+		</form>
+	</div>
+        
+				<div id="gray-sidebar" class="container-fluid">
+	        
+	          
+	          
+	              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about/overview.html">About DroneKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#open-source-community">Open source community</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#api-features">API features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/release_notes.html">Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#latest-release">Latest release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#changelog">Changelog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-1-2017-04-21">Version 2.9.1 (2017-04-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-0-2016-08-29">Version 2.9.0 (2016-08-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-8-0-2016-07-15">Version 2.8.0 (2016-07-15)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-7-0-2016-06-21">Version 2.7.0 (2016-06-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-6-0-2016-06-17">Version 2.6.0 (2016-06-17)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-5-0-2016-05-04">Version 2.5.0 (2016-05-04)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-4-0-2016-02-29">Version 2.4.0 (2016-02-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-3-0-2016-02-26">Version 2.3.0 (2016-02-26)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-2-0-2016-02-19">Version 2.2.0 (2016-02-19)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-1-0-2016-02-16">Version 2.1.0 (2016-02-16)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-2-2015-11-30">Version 2.0.2 (2015-11-30)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-0-2015-11-23">Version 2.0.0 (2015-11-23)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#all-releases">All releases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#working-with-releases">Working with releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/migrating.html">Migrating to DKPY 2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#code-changes">Code changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connecting-to-a-vehicle">Connecting to a vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connection-status-checks">Connection status checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#script-completion-checks">Script completion checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#command-line-arguments">Command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#current-script-directory">Current script directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#vehicle-location">Vehicle.location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#takeoff-and-movement-commands">Takeoff and movement commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#home-location">Home location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#missions-and-waypoints">Missions and Waypoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#parameter-changes">Parameter changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#intercepting-mavlink-messages">Intercepting MAVLink Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#new-attributes">New attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#channel-overrides">Channel Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/license.html">Open Source Licence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#basic-hello-drone">Basic “Hello Drone”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/index.html">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop/installation.html">Installing DroneKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/companion-computers.html">Companion Computers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#raspberrypi">RaspberryPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#intel-edison">Intel Edison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#beagleboneblack">BeagleBoneBlack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#odroid">Odroid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/sitl_setup.html">Simulated Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl">DroneKit-SITL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#running-sitl">Running SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#connecting-to-dronekit-sitl">Connecting to DroneKit-SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl-python-api">DroneKit-SITL Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#building-sitl-from-source">Building SITL from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#connecting-an-additional-ground-station">Connecting an additional Ground Station</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/best_practice.html">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#general-considerations">General considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#connecting">Connecting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launch-sequence">Launch sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#movement-commands">Movement commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#vehicle-information">Vehicle information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#missions-and-waypoints">Missions and waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#monitor-and-react-to-state-changes">Monitor and react to state changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#sleep-the-script-when-not-needed">Sleep the script when not needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#exiting-a-script">Exiting a script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#subclass-vehicle">Subclass Vehicle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#current-script-directory">Current script directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/coding_standards.html">Coding Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/index.html">Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/connecting_vehicle.html">Connecting to a Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/connecting_vehicle.html#get-started-connect-string">Connection string options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/connecting_vehicle.html#connecting-to-multiple-vehicles">Connecting to multiple vehicles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html">Vehicle State and Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#attributes">Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#getting-attributes">Getting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#setting-attributes">Setting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#home-location">Home location</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#getting-parameters">Getting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#setting-parameters">Setting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#listing-all-parameters">Listing all parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#observing-parameter-changes">Observing parameter changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/taking_off.html">Taking Off</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/copter/guided_mode.html">Guiding and Controlling Copter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#controlling-vehicle-movement">Controlling vehicle movement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#position-control">Position control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#velocity-control">Velocity control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#acceleration-and-force-control">Acceleration and force control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#guided-mode-commands">Guided mode commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#sending-messages-commands">Sending messages/commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#supported-commands">Supported commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#setting-the-yaw">Setting the Yaw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#setting-the-roi">Setting the ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#command-acknowledgements-and-response-values">Command acknowledgements and response values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#frame-conversion-functions">Frame conversion functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#other-information">Other information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/auto_mode.html">Missions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#mission-command-overview">Mission Command Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#download-current-mission">Download current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#clearing-current-mission">Clearing current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#creating-adding-mission-commands">Creating/adding mission commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#modifying-missions">Modifying missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#running-and-monitoring-missions">Running and monitoring missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#handling-the-end-of-a-mission">Handling the end of a mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#useful-mission-functions">Useful Mission functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#load-a-mission-from-a-file">Load a mission from a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#save-a-mission-to-a-file">Save a mission to a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#get-distance-to-waypoint">Get distance to waypoint</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#useful-links">Useful Links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/debugging.html">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#pdb-the-python-debugger">pdb - The Python Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#pudb-a-full-screen-console-based-python-debugger">pudb - A full-screen, console-based Python debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#print-log-statements">Print/log statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#other-ides-debuggers">Other IDEs/debuggers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/mavlink_messages.html">MAVLink Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#creating-a-message-listener">Creating a message listener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#watching-all-messages">Watching all messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#removing-an-observer">Removing an observer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/running_examples.html">Running the Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/vehicle_state.html">Vehicle State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/simple_goto.html">Simple Goto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#takeoff">Takeoff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#flying-to-a-point-simple-goto">Flying to a point - simple_goto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#rtl-return-to-launch">RTL - Return to launch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html">Guided Movement and Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-convenience-function">goto() - convenience function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#send-ned-velocity">send_ned_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#send-global-velocity">send_global_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-position-target-global-int">goto_position_target_global_int()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-position-target-local-ned">goto_position_target_local_ned()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#testbed-settings">Testbed settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/mission_basic.html">Basic Mission</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/mission_import_export.html">Mission Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/create_attribute.html">Create Attribute in App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/create_attribute.html#subclassing-vehicle">Subclassing Vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/create_attribute.html#using-the-vehicle-subclass">Using the Vehicle subclass</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/follow_me.html">Follow Me (Linux only)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/drone_delivery.html">Drone Delivery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#screenshots">Screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/drone_delivery.html#using-attribute-observers">Using attribute observers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/drone_delivery.html#starting-cherrypy-from-a-dronekit-application">Starting CherryPy from a DroneKit application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/flight_replay.html">Flight Replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/flight_replay.html#getting-the-points">Getting the points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/flight_replay.html#setting-the-new-waypoints">Setting the new waypoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/channel_overrides.html">Channel Overrides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#source-code">Source code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">How you can Contribute</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Contributing to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-code">Test code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-local-testing">Setting up local testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unit-tests">Unit tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#integration-tests">Integration tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contributions_documentation.html">Contributing to the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributions_documentation.html#documentation-system-overview">Documentation system overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions_documentation.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions_documentation.html#building-the-docs">Building the docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributions_documentation.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_setup_windows.html">Building DroneKit-Python on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_setup_windows.html#install-dronekit-using-winpython-command-line">Install DroneKit using WinPython command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_setup_windows.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_setup_windows.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="developer_setup_linux.html">Building DroneKit-Python on Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="developer_setup_linux.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer_setup_linux.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../automodule.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference external" href="http://python.dronekit.io/genindex.html">Index</a></li>
+</ul>
+</li>
+</ul>
+
+	          
+	        
+				</div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="api-content">
+					
+  <div class="section" id="contributing-to-the-api">
+<span id="contributing-api"></span><h1>Contributing to the API<a class="headerlink" href="#contributing-to-the-api" title="Permalink to this headline">¶</a></h1>
+<p>This article provides a high level overview of how to contribute changes to the DroneKit-Python source code.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">We highly recommend that changes and ideas are <a class="reference external" href="https://github.com/dronekit/dronekit-python/issues">discussed with the project team</a> before starting work!</p>
+</div>
+<div class="section" id="submitting-changes">
+<h2>Submitting changes<a class="headerlink" href="#submitting-changes" title="Permalink to this headline">¶</a></h2>
+<p>Contributors should fork the main <a class="reference external" href="https://github.com/dronekit/dronekit-python">dronekit/dronekit-python/</a>
+repository and contribute changes back to the project master branch using pull requests</p>
+<ul class="simple">
+<li>Changes should be <a class="reference internal" href="#contributing-test-code"><span class="std std-ref">tested locally</span></a> before submission.</li>
+<li>Changes to the public API should be <a class="reference internal" href="contributions_documentation.html#contributing-to-documentation"><span class="std std-ref">documented</span></a> (we will provide subediting support!)</li>
+<li>Pull requests should be as small and focussed as possible to make them easier to review.</li>
+<li>Pull requests should be rebased against the main project before submission to make integration easier.</li>
+</ul>
+</div>
+<div class="section" id="test-code">
+<span id="contributing-test-code"></span><h2>Test code<a class="headerlink" href="#test-code" title="Permalink to this headline">¶</a></h2>
+<p>There are three test suites in DroneKit-Python:</p>
+<ul class="simple">
+<li><strong>Unit tests</strong> (<code class="file docutils literal notranslate"><span class="pre">tests/unit</span></code>) — verify all code paths of the API.</li>
+<li><strong>Integration tests</strong> (<code class="file docutils literal notranslate"><span class="pre">tests/sitl</span></code>) — verify real-world code, examples, and documentation as they would perform in a real environment.</li>
+</ul>
+<p>Test code should be used to verify new and changed functionality. New tests should:</p>
+<ol class="arabic simple">
+<li>Verify all code paths that code can take.</li>
+<li>Be concise and straightforward.</li>
+<li>Be documented.</li>
+</ol>
+<div class="section" id="setting-up-local-testing">
+<h3>Setting up local testing<a class="headerlink" href="#setting-up-local-testing" title="Permalink to this headline">¶</a></h3>
+<p>Follow the links below to set up a development environment on your Linux or Windows computer.</p>
+<ul class="simple">
+<li><a class="reference internal" href="developer_setup_linux.html#dronekit-development-linux"><span class="std std-ref">Building DroneKit-Python on Linux</span></a></li>
+<li><a class="reference internal" href="developer_setup_windows.html#dronekit-development-windows"><span class="std std-ref">Building DroneKit-Python on Windows</span></a></li>
+</ul>
+<p>The tests require additional pip modules, including <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a>, a
+Python library and tool for writing and running test scripts. These can be installed separately using either of the commands below:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install just the additional requirements for tests</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span> <span class="n">nose</span> <span class="n">mock</span>
+
+<span class="c1"># (or) Install all requirements for dronekit, tests, and building documentation</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>For several tests, you may be required to set an <strong>environment variable</strong>. In your command line, you can set the name of a variable to equal a value using the following invocation, depending on your OS:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>export NAME=VALUE      # works on OS X and Linux
+set NAME=VALUE         # works on Windows cmd.exe
+$env:NAME = &quot;VALUE&quot;    # works on Windows Powershell
+</pre></div>
+</div>
+</div>
+<div class="section" id="unit-tests">
+<h3>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h3>
+<p>All new features should be created with accompanying unit tests.</p>
+<p>DroneKit-Python unit tests are based on the <a class="reference external" href="https://nose.readthedocs.org/en/latest/">nose</a> test framework,
+and use <a class="reference external" href="https://docs.python.org/dev/library/unittest.mock.html">mock</a> to simulate objects and APIs and
+ensure correct results.</p>
+<p>To run the tests and display a summary of the results (on any OS),
+navigate to the <strong>dronekit-python</strong> folder and enter the following
+command on a terminal/prompt:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="n">dronekit</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">unit</span>
+</pre></div>
+</div>
+<div class="section" id="writing-a-new-unit-test">
+<h4>Writing a new unit test<a class="headerlink" href="#writing-a-new-unit-test" title="Permalink to this headline">¶</a></h4>
+<p>Create any file named <code class="file docutils literal notranslate"><span class="pre">test_XXX.py</span></code> in the <code class="file docutils literal notranslate"><span class="pre">tests/unit</span></code> folder to add it as a test.
+Feel free to copy from existing tests to get started. When <em>nosetests</em> is run, it will add your new test to its summary.</p>
+<p>Tests names should be named based on their associated Github issue (for example,
+<code class="docutils literal notranslate"><span class="pre">test_12.py</span></code> for <a class="reference external" href="https://github.com/dronekit/dronekit-python/issues/12">issue #12</a>)
+or describe the functionality covered (for example, <code class="docutils literal notranslate"><span class="pre">test_waypoints.py</span></code>
+for a unit test for the waypoints API).</p>
+<p>Use assertions to test your code is consistent. You can use the built-in Python <code class="docutils literal notranslate"><span class="pre">assert</span></code> macro as well as <code class="docutils literal notranslate"><span class="pre">assert_equals</span></code> and <code class="docutils literal notranslate"><span class="pre">assert_not_equals</span></code>
+from the <code class="docutils literal notranslate"><span class="pre">notestools</span></code> module:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Avoiding printing any data from your test!</p>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nose.tools</span> <span class="k">import</span> <span class="n">assert_equals</span><span class="p">,</span> <span class="n">assert_not_equals</span>
+
+<span class="k">def</span> <span class="nf">test_this</span><span class="p">(</span><span class="n">the_number_two</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">the_number_two</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;2 should be greater than zero!&#39;</span>
+    <span class="n">assert_equals</span><span class="p">(</span><span class="n">the_number_two</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;2 should equal two!&#39;</span><span class="p">)</span>
+    <span class="n">assert_not_equals</span><span class="p">(</span><span class="n">the_number_two</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;2 should equal one!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please add documentation to each test function describing what behavior it verifies.</p>
+</div>
+</div>
+<div class="section" id="integration-tests">
+<h3>Integration tests<a class="headerlink" href="#integration-tests" title="Permalink to this headline">¶</a></h3>
+<p>Integrated tests use a custom test runner that is similar to <em>nosetests</em>. On any OS, enter the following command on a terminal/prompt to run all the integrated tests (and display summary results):</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">dronekit</span><span class="o">-</span><span class="n">python</span>
+<span class="n">nosetests</span> <span class="n">dronekit</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">sitl</span>
+</pre></div>
+</div>
+<p>You can choose to run a specific tests. The example below shows how to run
+<strong>dronekit-pythondronekittestsitltest_12.py</strong>.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nosetests</span> <span class="n">dronekit</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">sitl</span><span class="o">.</span><span class="n">test_12</span>
+</pre></div>
+</div>
+<div class="section" id="configuring-the-test-environment">
+<h4>Configuring the test environment<a class="headerlink" href="#configuring-the-test-environment" title="Permalink to this headline">¶</a></h4>
+<p>Integrated tests use the SITL environment to run DroneKit tests against a simulated Copter. Because these tests emulate Copter in real-time, you can set several environment variables to tweak the environment that code is run in:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal notranslate"><span class="pre">TEST_SPEEDUP</span></code> - Speedup factor to SITL. Default is <code class="docutils literal notranslate"><span class="pre">TEST_SPEEDUP=1</span></code>. You can increase this factor to speed up how long your tests take to run.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TEST_RATE</span></code> - Sets framerate. Default is <code class="docutils literal notranslate"><span class="pre">TEST_RATE=200</span></code> for copter, 50 for rover, 50 for plane.</li>
+<li><code class="docutils literal notranslate"><span class="pre">TEST_RETRY</span></code> - Retry failed tests. Default is <code class="docutils literal notranslate"><span class="pre">TEST_RETRY=1</span></code>. This is useful if your testing environment generates inconsistent success rates because of timing.</li>
+</ol>
+</div>
+<div class="section" id="writing-a-new-integration-test">
+<h4>Writing a new integration test<a class="headerlink" href="#writing-a-new-integration-test" title="Permalink to this headline">¶</a></h4>
+<p>Integration tests should be written or improved whenever:</p>
+<ol class="arabic simple">
+<li>New functionality has been added to encapsulate or abstract older methods of interacting with the API.</li>
+<li>Example code or documentation has been added.</li>
+<li>A feature could not be tested by unit tests alone (e.g. timing issues, mode changing, etc.)</li>
+</ol>
+<p>You can write a new integrated test by adding (or copying) a file with the naming scheme <code class="file docutils literal notranslate"><span class="pre">test_XXX.py</span></code> to the <code class="file docutils literal notranslate"><span class="pre">tests/sitl</span></code> directory.</p>
+<p>Tests names should be named based on their associated Github issue (for example,
+<code class="docutils literal notranslate"><span class="pre">test_12.py</span></code> for <a class="reference external" href="https://github.com/dronekit/dronekit-python/issues/12">issue #12</a>)
+or describe the functionality covered (for example, <code class="docutils literal notranslate"><span class="pre">test_waypoints.py</span></code>
+for an integration test for the waypoints API).</p>
+<p>Tests should minimally use the imports shown below and decorate test functions with <code class="docutils literal notranslate"><span class="pre">&#64;with_sitl</span></code>
+(this sets up the test and passes in a connection string for SITL).</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dronekit</span> <span class="k">import</span> <span class="n">connect</span>
+<span class="kn">from</span> <span class="nn">dronekit.test</span> <span class="k">import</span> <span class="n">with_sitl</span>
+<span class="kn">from</span> <span class="nn">nose.tools</span> <span class="k">import</span> <span class="n">assert_equals</span><span class="p">,</span> <span class="n">assert_not_equals</span>
+
+<span class="nd">@with_sitl</span>
+<span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">connpath</span><span class="p">):</span>
+    <span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">connpath</span><span class="p">)</span>
+
+    <span class="c1"># Test using assert, assert_equals and assert_not_equals</span>
+    <span class="o">...</span>
+
+    <span class="n">vehicle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Use assertions to test your code is consistent. You can use the built-in Python <code class="docutils literal notranslate"><span class="pre">assert</span></code> macro as well as <code class="docutils literal notranslate"><span class="pre">assert_equals</span></code> and <code class="docutils literal notranslate"><span class="pre">assert_not_equals</span></code>
+from the <code class="docutils literal notranslate"><span class="pre">testlib</span></code> module:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Avoiding printing any data from your test!</p>
+</div>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">testlib</span> <span class="k">import</span> <span class="n">assert_equals</span>
+
+<span class="k">def</span> <span class="nf">test_this</span><span class="p">(</span><span class="n">the_number_two</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">the_number_two</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;2 should be greater than zero!&#39;</span>
+    <span class="n">assert_equals</span><span class="p">(</span><span class="n">the_number_two</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;2 should equal two!&#39;</span>
+</pre></div>
+</div>
+<p>Please add documentation to each test function describing what behavior it verifies.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+					<footer id="footer">
+						
+	<div class="footer-buttons" role="navigation" aria-label="footer navigation">
+		
+			<a href="contributions_documentation.html" class="btn btn-default pull-right" title="Contributing to the Documentation">
+				Next <span class="fa fa-arrow-circle-right"></span>
+			</a>
+		
+		
+			<a href="getting_started.html" class="btn btn-default" title="How you can Contribute">
+				<span class="fa fa-arrow-circle-left"></span> Previous
+			</a>
+		
+	</div>
+
+
+<hr/>
+
+<div role="contentinfo">
+	<p>
+				&copy; Copyright 2015-2016, 3D Robotics.
+	</p>
+</div>
+Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/3drobotics/sphinx_3dr_theme">theme</a> provided by <a href="https://3drobotics.com/">3D Robotics</a> for <a href="http://dronekit.io/">DroneKit</a>.
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+		<script type="text/javascript" src="../_static/js/jquery.js"></script>
+		<script type="text/javascript" src="../_static/js/scroll.js"></script>
+		<script type="text/javascript" src="../_static/underscore.js"></script>
+		<script type="text/javascript" src="../_static/doctools.js"></script>
+		<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../_static/js/cool-select.js"></script>
+		<script type="text/javascript" src="../_static/searchtools.js"></script>
+	
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-39974306-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/contributing/contributions_api.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:47 GMT -->
+</html>

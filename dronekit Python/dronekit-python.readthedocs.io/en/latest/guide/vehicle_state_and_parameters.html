@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/guide/vehicle_state_and_parameters.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:38 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+		<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+	
+		<link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+	
+
+	<link rel="stylesheet" href="../_static/css/style.css" />
+	<script src="../_static/js/modernizr.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+
+	
+		<title>Vehicle State and Settings</title>
+	
+
+	<script type="text/javascript">
+		var DOCUMENTATION_OPTIONS = {
+			URL_ROOT: '',
+			VERSION: '2.4.0',
+			COLLAPSE_INDEX: false,
+			FILE_SUFFIX: '.html',
+			HAS_SOURCE: true
+		};
+	</script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="vehicle_state_and_parameters.html" />
+
+<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="../_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "guide/vehicle_state_and_parameters"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="../../../../assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+<body>
+	<nav id="topnav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed icon-facebook-sign" type="button" data-toggle="collapse" data-target="#collapsable-topnav">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="http://dronekit.io/">
+					<img src="../_static/images/new-DK-logo-color.svg" alt="3DR">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="collapsable-topnav">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://cloud.dronekit.io/" class="cloud">Cloud</a>
+					</li>
+					<li>
+						<a href="http://python.dronekit.io/" class="air">Python</a>
+					</li>
+					<li>
+						<a href="http://android.dronekit.io/" class="ground">Android</a>
+					</li>
+					<li>
+						<a href="http://dronekit.io/support" class="support">Support</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row gray-bg">
+			<div class="col-sm-3 col-md-2 col-sidebar">
+
+        
+					
+	<div id="sidebar-search" role="search">
+		<form id="rtd-search-form" class="form-inline" action="https://dronekit-python.readthedocs.io/en/latest/search.html" method="get">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input class="form-control" type="text" name="q" placeholder="Search..." />
+			</div>
+			<input type="hidden" name="check_keywords" value="yes" />
+			<input type="hidden" name="area" value="default" />
+		</form>
+	</div>
+        
+				<div id="gray-sidebar" class="container-fluid">
+	        
+	          
+	          
+	              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about/overview.html">About DroneKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#open-source-community">Open source community</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#api-features">API features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/release_notes.html">Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#latest-release">Latest release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#changelog">Changelog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-1-2017-04-21">Version 2.9.1 (2017-04-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-0-2016-08-29">Version 2.9.0 (2016-08-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-8-0-2016-07-15">Version 2.8.0 (2016-07-15)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-7-0-2016-06-21">Version 2.7.0 (2016-06-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-6-0-2016-06-17">Version 2.6.0 (2016-06-17)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-5-0-2016-05-04">Version 2.5.0 (2016-05-04)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-4-0-2016-02-29">Version 2.4.0 (2016-02-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-3-0-2016-02-26">Version 2.3.0 (2016-02-26)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-2-0-2016-02-19">Version 2.2.0 (2016-02-19)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-1-0-2016-02-16">Version 2.1.0 (2016-02-16)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-2-2015-11-30">Version 2.0.2 (2015-11-30)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-0-2015-11-23">Version 2.0.0 (2015-11-23)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#all-releases">All releases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#working-with-releases">Working with releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/migrating.html">Migrating to DKPY 2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#code-changes">Code changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connecting-to-a-vehicle">Connecting to a vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connection-status-checks">Connection status checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#script-completion-checks">Script completion checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#command-line-arguments">Command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#current-script-directory">Current script directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#vehicle-location">Vehicle.location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#takeoff-and-movement-commands">Takeoff and movement commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#home-location">Home location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#missions-and-waypoints">Missions and Waypoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#parameter-changes">Parameter changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#intercepting-mavlink-messages">Intercepting MAVLink Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#new-attributes">New attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#channel-overrides">Channel Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/license.html">Open Source Licence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#basic-hello-drone">Basic “Hello Drone”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/index.html">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop/installation.html">Installing DroneKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/companion-computers.html">Companion Computers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#raspberrypi">RaspberryPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#intel-edison">Intel Edison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#beagleboneblack">BeagleBoneBlack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#odroid">Odroid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/sitl_setup.html">Simulated Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl">DroneKit-SITL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#running-sitl">Running SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#connecting-to-dronekit-sitl">Connecting to DroneKit-SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl-python-api">DroneKit-SITL Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#building-sitl-from-source">Building SITL from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#connecting-an-additional-ground-station">Connecting an additional Ground Station</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/best_practice.html">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#general-considerations">General considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#connecting">Connecting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launch-sequence">Launch sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#movement-commands">Movement commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#vehicle-information">Vehicle information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#missions-and-waypoints">Missions and waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#monitor-and-react-to-state-changes">Monitor and react to state changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#sleep-the-script-when-not-needed">Sleep the script when not needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#exiting-a-script">Exiting a script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#subclass-vehicle">Subclass Vehicle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#current-script-directory">Current script directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/coding_standards.html">Coding Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="connecting_vehicle.html">Connecting to a Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="connecting_vehicle.html#get-started-connect-string">Connection string options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connecting_vehicle.html#connecting-to-multiple-vehicles">Connecting to multiple vehicles</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Vehicle State and Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-attributes">Getting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-attributes">Setting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#home-location">Home location</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-parameters">Getting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-parameters">Setting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#listing-all-parameters">Listing all parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#observing-parameter-changes">Observing parameter changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="taking_off.html">Taking Off</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copter/guided_mode.html">Guiding and Controlling Copter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#controlling-vehicle-movement">Controlling vehicle movement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#position-control">Position control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#velocity-control">Velocity control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#acceleration-and-force-control">Acceleration and force control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#guided-mode-commands">Guided mode commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#sending-messages-commands">Sending messages/commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#supported-commands">Supported commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#setting-the-yaw">Setting the Yaw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#setting-the-roi">Setting the ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="copter/guided_mode.html#command-acknowledgements-and-response-values">Command acknowledgements and response values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#frame-conversion-functions">Frame conversion functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copter/guided_mode.html#other-information">Other information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="auto_mode.html">Missions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#mission-command-overview">Mission Command Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#download-current-mission">Download current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#clearing-current-mission">Clearing current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#creating-adding-mission-commands">Creating/adding mission commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#modifying-missions">Modifying missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#running-and-monitoring-missions">Running and monitoring missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#handling-the-end-of-a-mission">Handling the end of a mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#useful-mission-functions">Useful Mission functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_mode.html#load-a-mission-from-a-file">Load a mission from a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_mode.html#save-a-mission-to-a-file">Save a mission to a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_mode.html#get-distance-to-waypoint">Get distance to waypoint</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="auto_mode.html#useful-links">Useful Links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging.html">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#pdb-the-python-debugger">pdb - The Python Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#pudb-a-full-screen-console-based-python-debugger">pudb - A full-screen, console-based Python debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#print-log-statements">Print/log statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html#other-ides-debuggers">Other IDEs/debuggers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mavlink_messages.html">MAVLink Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mavlink_messages.html#creating-a-message-listener">Creating a message listener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mavlink_messages.html#watching-all-messages">Watching all messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mavlink_messages.html#removing-an-observer">Removing an observer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/running_examples.html">Running the Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/vehicle_state.html">Vehicle State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/vehicle_state.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/simple_goto.html">Simple Goto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#takeoff">Takeoff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#flying-to-a-point-simple-goto">Flying to a point - simple_goto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/simple_goto.html#rtl-return-to-launch">RTL - Return to launch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/simple_goto.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html">Guided Movement and Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-convenience-function">goto() - convenience function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#send-ned-velocity">send_ned_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#send-global-velocity">send_global_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-position-target-global-int">goto_position_target_global_int()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#goto-position-target-local-ned">goto_position_target_local_ned()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#testbed-settings">Testbed settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/guided-set-speed-yaw-demo.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/mission_basic.html">Basic Mission</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_basic.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/mission_import_export.html">Mission Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/mission_import_export.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/create_attribute.html">Create Attribute in App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/create_attribute.html#subclassing-vehicle">Subclassing Vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/create_attribute.html#using-the-vehicle-subclass">Using the Vehicle subclass</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/create_attribute.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/follow_me.html">Follow Me (Linux only)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/follow_me.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/drone_delivery.html">Drone Delivery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#screenshots">Screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/drone_delivery.html#using-attribute-observers">Using attribute observers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/drone_delivery.html#starting-cherrypy-from-a-dronekit-application">Starting CherryPy from a DroneKit application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/drone_delivery.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/flight_replay.html">Flight Replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/flight_replay.html#getting-the-points">Getting the points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../examples/flight_replay.html#setting-the-new-waypoints">Setting the new waypoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/flight_replay.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/channel_overrides.html">Channel Overrides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/channel_overrides.html#source-code">Source code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/getting_started.html">How you can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_api.html">Contributing to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#test-code">Test code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#setting-up-local-testing">Setting up local testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#integration-tests">Integration tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_documentation.html">Contributing to the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#documentation-system-overview">Documentation system overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#building-the-docs">Building the docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_windows.html">Building DroneKit-Python on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#install-dronekit-using-winpython-command-line">Install DroneKit using WinPython command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_linux.html">Building DroneKit-Python on Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../automodule.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference external" href="http://python.dronekit.io/genindex.html">Index</a></li>
+</ul>
+</li>
+</ul>
+
+	          
+	        
+				</div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="api-content">
+					
+  <div class="section" id="vehicle-state-and-settings">
+<span id="vehicle-information"></span><h1>Vehicle State and Settings<a class="headerlink" href="#vehicle-state-and-settings" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="../automodule.html#dronekit.Vehicle" title="dronekit.Vehicle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle</span></code></a> class exposes <em>most</em> state information (position, speed, etc.) through python
+<a class="reference internal" href="#vehicle-state-attributes"><span class="std std-ref">attributes</span></a>, while vehicle <a class="reference internal" href="#vehicle-state-parameters"><span class="std std-ref">parameters</span></a> (settings)
+are accessed though named elements of <a class="reference internal" href="../automodule.html#dronekit.Vehicle.parameters" title="dronekit.Vehicle.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.parameters</span></code></a>.</p>
+<p>This topic explains how to get, set and observe vehicle state and parameter information (including getting the
+<a class="reference internal" href="#vehicle-state-home-location"><span class="std std-ref">Home location</span></a>).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can test most of the code in this topic by running the <a class="reference internal" href="../examples/vehicle_state.html#example-vehicle-state"><span class="std std-ref">Vehicle State</span></a> example.</p>
+</div>
+<div class="section" id="attributes">
+<span id="vehicle-state-attributes"></span><h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline">¶</a></h2>
+<p>Vehicle state information is exposed through vehicle <em>attributes</em>. DroneKit-Python currently supports the following
+“standard” attributes:
+<a class="reference internal" href="../automodule.html#dronekit.Version" title="dronekit.Version"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.version</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Capabilities" title="dronekit.Capabilities"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.location.capabilities</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Locations.global_frame" title="dronekit.Locations.global_frame"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.location.global_frame</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Locations.global_relative_frame" title="dronekit.Locations.global_relative_frame"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.location.global_relative_frame</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Locations.local_frame" title="dronekit.Locations.local_frame"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.location.local_frame</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.attitude" title="dronekit.Vehicle.attitude"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.attitude</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.velocity" title="dronekit.Vehicle.velocity"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.velocity</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.gps_0" title="dronekit.Vehicle.gps_0"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.gps_0</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.gimbal" title="dronekit.Vehicle.gimbal"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.gimbal</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.battery" title="dronekit.Vehicle.battery"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.battery</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.rangefinder" title="dronekit.Vehicle.rangefinder"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.rangefinder</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.ekf_ok" title="dronekit.Vehicle.ekf_ok"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.ekf_ok</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.last_heartbeat" title="dronekit.Vehicle.last_heartbeat"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.last_heartbeat</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.home_location" title="dronekit.Vehicle.home_location"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.home_location</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.system_status" title="dronekit.Vehicle.system_status"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.system_status</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.heading" title="dronekit.Vehicle.heading"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.heading</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.is_armable" title="dronekit.Vehicle.is_armable"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.is_armable</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.airspeed" title="dronekit.Vehicle.airspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.airspeed</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.groundspeed" title="dronekit.Vehicle.groundspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.groundspeed</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.armed" title="dronekit.Vehicle.armed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.armed</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.mode" title="dronekit.Vehicle.mode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.mode</span></code></a>.</p>
+<p>Attributes are initially created with <code class="docutils literal notranslate"><span class="pre">None</span></code> values for their members. In most cases the members are populated
+(and repopulated) as new MAVLink messages of the associated types are received from the vehicle.</p>
+<p>All of the attributes can be <a class="reference internal" href="#vehicle-state-read-attributes"><span class="std std-ref">read</span></a>,
+but only the <a class="reference internal" href="../automodule.html#dronekit.Vehicle.home_location" title="dronekit.Vehicle.home_location"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.home_location</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.gimbal" title="dronekit.Vehicle.gimbal"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.gimbal</span></code></a>
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.airspeed" title="dronekit.Vehicle.airspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.airspeed</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.groundspeed" title="dronekit.Vehicle.groundspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.groundspeed</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.mode" title="dronekit.Vehicle.mode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.mode</span></code></a> and
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.armed" title="dronekit.Vehicle.armed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.armed</span></code></a>
+status can be <a class="reference internal" href="#vehicle-state-set-attributes"><span class="std std-ref">set</span></a>.</p>
+<p>Almost all of the attributes can be <a class="reference internal" href="#vehicle-state-observe-attributes"><span class="std std-ref">observed</span></a>.</p>
+<p>The behaviour of <a class="reference internal" href="../automodule.html#dronekit.Vehicle.home_location" title="dronekit.Vehicle.home_location"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.home_location</span></code></a> is different
+from the other attributes, and is <a class="reference internal" href="#vehicle-state-home-location"><span class="std std-ref">discussed in its own section below</span></a>.</p>
+<div class="section" id="getting-attributes">
+<span id="vehicle-state-read-attributes"></span><h3>Getting attributes<a class="headerlink" href="#getting-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The code fragment below shows how to read and print almost all the attributes (values are
+regularly updated from MAVLink messages sent by the vehicle).</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># vehicle is an instance of the Vehicle class</span>
+<span class="nb">print</span> <span class="s2">&quot;Autopilot Firmware version: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span>
+<span class="nb">print</span> <span class="s2">&quot;Autopilot capabilities (supports ftp): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">ftp</span>
+<span class="nb">print</span> <span class="s2">&quot;Global Location: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">global_frame</span>
+<span class="nb">print</span> <span class="s2">&quot;Global Location (relative altitude): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">global_relative_frame</span>
+<span class="nb">print</span> <span class="s2">&quot;Local Location: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">local_frame</span>    <span class="c1">#NED</span>
+<span class="nb">print</span> <span class="s2">&quot;Attitude: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">attitude</span>
+<span class="nb">print</span> <span class="s2">&quot;Velocity: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">velocity</span>
+<span class="nb">print</span> <span class="s2">&quot;GPS: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">gps_0</span>
+<span class="nb">print</span> <span class="s2">&quot;Groundspeed: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">groundspeed</span>
+<span class="nb">print</span> <span class="s2">&quot;Airspeed: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">airspeed</span>
+<span class="nb">print</span> <span class="s2">&quot;Gimbal status: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">gimbal</span>
+<span class="nb">print</span> <span class="s2">&quot;Battery: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">battery</span>
+<span class="nb">print</span> <span class="s2">&quot;EKF OK?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">ekf_ok</span>
+<span class="nb">print</span> <span class="s2">&quot;Last Heartbeat: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">last_heartbeat</span>
+<span class="nb">print</span> <span class="s2">&quot;Rangefinder: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">rangefinder</span>
+<span class="nb">print</span> <span class="s2">&quot;Rangefinder distance: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">rangefinder</span><span class="o">.</span><span class="n">distance</span>
+<span class="nb">print</span> <span class="s2">&quot;Rangefinder voltage: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">rangefinder</span><span class="o">.</span><span class="n">voltage</span>
+<span class="nb">print</span> <span class="s2">&quot;Heading: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">heading</span>
+<span class="nb">print</span> <span class="s2">&quot;Is Armable?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">is_armable</span>
+<span class="nb">print</span> <span class="s2">&quot;System status: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">system_status</span><span class="o">.</span><span class="n">state</span>
+<span class="nb">print</span> <span class="s2">&quot;Mode: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">name</span>    <span class="c1"># settable</span>
+<span class="nb">print</span> <span class="s2">&quot;Armed: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">armed</span>    <span class="c1"># settable</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A value of <code class="docutils literal notranslate"><span class="pre">None</span></code> for an attribute member indicates that the value has not yet been populated from the vehicle.
+For example, before GPS lock <a class="reference internal" href="../automodule.html#dronekit.Vehicle.gps_0" title="dronekit.Vehicle.gps_0"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.gps_0</span></code></a> will return a
+<a class="reference internal" href="../automodule.html#dronekit.GPSInfo" title="dronekit.GPSInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">GPSInfo</span></code></a> with <code class="docutils literal notranslate"><span class="pre">None</span></code> values for <code class="docutils literal notranslate"><span class="pre">eph</span></code>, <code class="docutils literal notranslate"><span class="pre">satellites_visible</span></code> etc.
+Attributes will also return  <code class="docutils literal notranslate"><span class="pre">None</span></code> if the associated hardware is not present on the connected device.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you’re using a <a class="reference internal" href="../develop/sitl_setup.html#sitl-setup"><span class="std std-ref">simulated vehicle</span></a> you can add support for optional hardware including
+<a class="reference external" href="http://dev.ardupilot.com/using-sitl-for-ardupilot-testing/#adding_a_virtual_rangefinder">rangefinders</a>
+and <a class="reference external" href="http://dev.ardupilot.com/using-sitl-for-ardupilot-testing/#adding_a_virtual_optical_flow_sensor">optical flow sensors</a>.</p>
+</div>
+</div>
+<div class="section" id="setting-attributes">
+<span id="vehicle-state-set-attributes"></span><h3>Setting attributes<a class="headerlink" href="#setting-attributes" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../automodule.html#dronekit.Vehicle.mode" title="dronekit.Vehicle.mode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.mode</span></code></a>, <a class="reference internal" href="../automodule.html#dronekit.Vehicle.armed" title="dronekit.Vehicle.armed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.armed</span></code></a>
+, <a class="reference internal" href="../automodule.html#dronekit.Vehicle.airspeed" title="dronekit.Vehicle.airspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.airspeed</span></code></a> and <a class="reference internal" href="../automodule.html#dronekit.Vehicle.groundspeed" title="dronekit.Vehicle.groundspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.groundspeed</span></code></a>,
+attributes can all be “directly” written (<a class="reference internal" href="../automodule.html#dronekit.Vehicle.home_location" title="dronekit.Vehicle.home_location"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.home_location</span></code></a> can also be directly written,
+but has special considerations that are <a class="reference internal" href="#vehicle-state-home-location"><span class="std std-ref">discussed below</span></a>).</p>
+<p>These attributes are set by assigning a value:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#disarm the vehicle</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">armed</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#set the default groundspeed to be used in movement commands</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">groundspeed</span> <span class="o">=</span> <span class="mf">3.2</span>
+</pre></div>
+</div>
+<p>Commands to change a value are <strong>not guaranteed to succeed</strong> (or even to be received) and code should be written with this in mind.
+For example, the code snippet below polls the attribute values to confirm they have changed before proceeding.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">VehicleMode</span><span class="p">(</span><span class="s2">&quot;GUIDED&quot;</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">armed</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">name</span><span class="o">==</span><span class="s1">&#39;GUIDED&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">armed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">api</span><span class="o">.</span><span class="n">exit</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="s2">&quot; Getting ready to take off ...&quot;</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While the autopilot does send information about the success (or failure) of the request,
+this is <a class="reference external" href="https://github.com/dronekit/dronekit-python/issues/114">not currently handled by DroneKit</a>.</p>
+</div>
+<p><a class="reference internal" href="../automodule.html#dronekit.Vehicle.gimbal" title="dronekit.Vehicle.gimbal"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.gimbal</span></code></a> can’t be written directly, but the gimbal can be controlled using the
+<a class="reference internal" href="../automodule.html#dronekit.Gimbal.rotate" title="dronekit.Gimbal.rotate"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.gimbal.rotate()</span></code></a> and <a class="reference internal" href="../automodule.html#dronekit.Gimbal.target_location" title="dronekit.Gimbal.target_location"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.gimbal.target_location()</span></code></a>
+methods. The first method lets you set the precise orientation of the gimbal while the second makes the gimbal track a specific “region of interest”.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Point the gimbal straight down</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">gimbal</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1">#Set the camera to track the current home position.</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">gimbal</span><span class="o">.</span><span class="n">target_location</span><span class="p">(</span><span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="observing-attribute-changes">
+<span id="vehicle-state-observe-attributes"></span><h3>Observing attribute changes<a class="headerlink" href="#observing-attribute-changes" title="Permalink to this headline">¶</a></h3>
+<p>You can observe any of the vehicle attributes and monitor for changes without the need for polling.</p>
+<p>Listeners (“observer callback functions”) are invoked differently based on the <em>type of observed attribute</em>. Attributes that represent sensor values or other
+“streams of information” are updated whenever a message is received from the vehicle. Attributes which reflect vehicle
+“state” are only updated when their values change (for example
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.system_status" title="dronekit.Vehicle.system_status"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.system_status</span></code></a>,
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.armed" title="dronekit.Vehicle.armed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.armed</span></code></a>, and
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.mode" title="dronekit.Vehicle.mode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.mode</span></code></a>).</p>
+<p>Callbacks are added using <a class="reference internal" href="../automodule.html#dronekit.Vehicle.add_attribute_listener" title="dronekit.Vehicle.add_attribute_listener"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.add_attribute_listener()</span></code></a> or the
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.on_attribute" title="dronekit.Vehicle.on_attribute"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.on_attribute()</span></code></a> decorator method. The main difference between these methods
+is that only attribute callbacks added with <a class="reference internal" href="../automodule.html#dronekit.Vehicle.add_attribute_listener" title="dronekit.Vehicle.add_attribute_listener"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.add_attribute_listener()</span></code></a>
+can be removed (see <a class="reference internal" href="../automodule.html#dronekit.Vehicle.remove_attribute_listener" title="dronekit.Vehicle.remove_attribute_listener"><code class="xref py py-func docutils literal notranslate"><span class="pre">remove_attribute_listener()</span></code></a>).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">observer</span></code> callback function is invoked with the following arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">self</span></code> - the associated <code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle</span></code>. This may be compared to a global vehicle handle
+to implement vehicle-specific callback handling (if needed).</li>
+<li><code class="docutils literal notranslate"><span class="pre">attr_name</span></code> - the attribute name. This can be used to infer which attribute has triggered
+if the same callback is used for watching several attributes.</li>
+<li><code class="docutils literal notranslate"><span class="pre">value</span></code> - the attribute value (so you don’t need to re-query the vehicle object).</li>
+</ul>
+<p>The code snippet below shows how to add (and remove) a callback function to observe changes
+in <a class="reference internal" href="../automodule.html#dronekit.Locations.global_frame" title="dronekit.Locations.global_frame"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.location.global_frame</span></code></a> using
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.add_attribute_listener" title="dronekit.Vehicle.add_attribute_listener"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.add_attribute_listener()</span></code></a>.
+The two second <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> is required because otherwise the observer might be removed before the the
+callback is first run.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1">#Callback to print the location in global frames. &#39;value&#39; is the updated value</span>
+ <span class="k">def</span> <span class="nf">location_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+     <span class="k">print</span> <span class="s2">&quot;Location (Global): &quot;</span><span class="p">,</span> <span class="n">value</span>
+
+
+ <span class="c1"># Add a callback `location_callback` for the `global_frame` attribute.</span>
+<span class="hll"> <span class="n">vehicle</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;location.global_frame&#39;</span><span class="p">,</span> <span class="n">location_callback</span><span class="p">)</span>
+</span>
+ <span class="c1"># Wait 2s so callback can be notified before the observer is removed</span>
+ <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+ <span class="c1"># Remove observer - specifying the attribute and previously registered callback function</span>
+ <span class="n">vehicle</span><span class="o">.</span><span class="n">remove_message_listener</span><span class="p">(</span><span class="s1">&#39;location.global_frame&#39;</span><span class="p">,</span> <span class="n">location_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The example above adds a listener on <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> to for attribute name <code class="docutils literal notranslate"><span class="pre">'location.global_frame'</span></code>
+You can alternatively add (and remove) a listener <code class="docutils literal notranslate"><span class="pre">Vehicle.location</span></code> for the attribute name <code class="docutils literal notranslate"><span class="pre">'global_frame'</span></code>.
+Both alternatives are shown below:</p>
+<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vehicle</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;location.global_frame&#39;</span><span class="p">,</span> <span class="n">location_callback</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;global_frame&#39;</span><span class="p">,</span> <span class="n">location_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The example below shows how you can declare an attribute callback using the
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.on_attribute" title="dronekit.Vehicle.on_attribute"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.on_attribute()</span></code></a> decorator function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="n">last_rangefinder_distance</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="hll"> <span class="nd">@vehicle.on_attribute</span><span class="p">(</span><span class="s1">&#39;rangefinder&#39;</span><span class="p">)</span>
+</span><span class="hll"> <span class="k">def</span> <span class="nf">rangefinder_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">attr_name</span><span class="p">):</span>
+</span>     <span class="c1">#attr_name not used here.</span>
+     <span class="k">global</span> <span class="n">last_rangefinder_distance</span>
+     <span class="k">if</span> <span class="n">last_rangefinder_distance</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rangefinder</span><span class="o">.</span><span class="n">distance</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+         <span class="k">return</span>
+     <span class="n">last_rangefinder_distance</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rangefinder</span><span class="o">.</span><span class="n">distance</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+     <span class="k">print</span> <span class="s2">&quot; Rangefinder (metres): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_rangefinder_distance</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The fragment above stores the result of the previous callback and only prints the output when there is a
+signficant change in <a class="reference internal" href="../automodule.html#dronekit.Vehicle.rangefinder" title="dronekit.Vehicle.rangefinder"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.rangefinder</span></code></a>. You might want to
+perform caching like this to ignore updates that are not significant to your code.</p>
+</div>
+<p>The examples above show how you can monitor a single attribute. You can pass the special name (‘<code class="docutils literal notranslate"><span class="pre">*</span></code>’) to specify a
+callback that will be called for any/all attribute changes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Demonstrate getting callback on any attribute change</span>
+<span class="k">def</span> <span class="nf">wildcard_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot; CALLBACK: (</span><span class="si">%s</span><span class="s2">): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">attr_name</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Add attribute callback detecting any attribute change&quot;</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">wildcard_callback</span><span class="p">)</span>
+
+
+<span class="k">print</span> <span class="s2">&quot; Wait 1s so callback invoked before observer removed&quot;</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s2">&quot; Remove Vehicle attribute observer&quot;</span>
+<span class="c1"># Remove observer added with `add_attribute_listener()`</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">remove_attribute_listener</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">wildcard_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="home-location">
+<span id="vehicle-state-home-location"></span><h3>Home location<a class="headerlink" href="#home-location" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Home location</em> is set when a vehicle first gets a good location fix from the GPS. The location is used
+as the target when the vehicle does a “return to launch”. In Copter missions (and often Plane) missions, the altitude of
+waypoints is set relative to this position.</p>
+<p><a class="reference internal" href="../automodule.html#dronekit.Vehicle.home_location" title="dronekit.Vehicle.home_location"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.home_location</span></code></a> has the following behaviour:</p>
+<ul>
+<li><p class="first">In order to <em>get</em> the current value (in a <a class="reference internal" href="../automodule.html#dronekit.LocationGlobal" title="dronekit.LocationGlobal"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationGlobal</span></code></a> object) you must first download
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.commands" title="dronekit.Vehicle.commands"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.commands</span></code></a>, as shown:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+<span class="nb">print</span> <span class="s2">&quot; Home Location: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span>
+</pre></div>
+</div>
+<p>The returned value is <code class="docutils literal notranslate"><span class="pre">None</span></code> before you download the commands or if the <code class="docutils literal notranslate"><span class="pre">home_location</span></code> has not yet been set by the autopilot.
+For this reason our example code checks that the value exists (in a loop) before writing it.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Vehicle Home location - will be `None` until first set by autopilot</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">:</span>
+    <span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="s2">&quot; Waiting for home location ...&quot;</span>
+
+<span class="c1"># We have a home location.</span>
+<span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Home location: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The attribute can be <em>set</em> to a <a class="reference internal" href="../automodule.html#dronekit.LocationGlobal" title="dronekit.LocationGlobal"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationGlobal</span></code></a> object
+(the code fragment below sets it to the current location):</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="o">=</span><span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">global_frame</span>
+</pre></div>
+</div>
+<p>There are some caveats:</p>
+<ul class="simple">
+<li>You must be able to read a non-<code class="docutils literal notranslate"><span class="pre">None</span></code> value before you can write it
+(the autopilot has to set the value initially before it can be written or read).</li>
+<li>The new location must be within 50 km of the EKF origin or setting the value will silently fail.</li>
+<li>The value is cached in the <code class="docutils literal notranslate"><span class="pre">home_location</span></code>. If the variable can potentially change on the vehicle
+you will need to re-download the <code class="docutils literal notranslate"><span class="pre">Vehicle.commands</span></code> in order to confirm the value.</li>
+</ul>
+</li>
+<li><p class="first">The attribute is not observable.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><a class="reference internal" href="../automodule.html#dronekit.Vehicle.home_location" title="dronekit.Vehicle.home_location"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.home_location</span></code></a> behaves this way because
+ArduPilot implements/stores the home location as a waypoint rather than sending them as messages.
+While DroneKit-Python hides this fact from you when working with commands, to access the value
+you still need to download the commands.</p>
+<p class="last">We hope to improve this attribute in later versions of ArduPilot, where there may be specific
+commands to get the home location from the vehicle.</p>
+</div>
+</div>
+</div>
+<div class="section" id="parameters">
+<span id="vehicle-state-parameters"></span><h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>Vehicle parameters provide the information used to configure the autopilot for the vehicle-specific hardware/capabilities.
+The available parameters for each platform are documented in the ArduPilot wiki here:
+<a class="reference external" href="http://copter.ardupilot.com/wiki/configuration/arducopter-parameters/">Copter Parameters</a>,
+<a class="reference external" href="http://plane.ardupilot.com/wiki/arduplane-parameters/">Plane Parameters</a>,
+<a class="reference external" href="http://rover.ardupilot.com/wiki/apmrover2-parameters/">Rover Parameters</a>
+(the lists are automatically generated from the latest ArduPilot source code, and may contain or omit parameters
+in your vehicle).</p>
+<p>DroneKit downloads all parameters when you first connect to the UAV (forcing parameter reads to wait
+until the download completes), and subsequently keeps the values updated by monitoring vehicle messages
+for changes to individual parameters. This process ensures that it is always safe to read supported parameters,
+and that their values will match the information on the vehicle.</p>
+<p>Parameters can be read, set, observed and iterated using the <a class="reference internal" href="../automodule.html#dronekit.Vehicle.parameters" title="dronekit.Vehicle.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.parameters</span></code></a>
+attribute (a <a class="reference internal" href="../automodule.html#dronekit.Parameters" title="dronekit.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a> object).</p>
+<div class="section" id="getting-parameters">
+<h3>Getting parameters<a class="headerlink" href="#getting-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The parameters are read using the parameter name as a key (case-insensitive). Reads will always succeed unless you
+attempt to access an unsupported parameter (which will result in a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> exception).</p>
+<p>The code snippet below shows how to get the Minimum Throttle (THR_MIN) setting. On Copter and Rover (not Plane), this is the minimum PWM setting for the
+throttle at which the motors will keep spinning.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the value of the THR_MIN parameter.</span>
+<span class="nb">print</span> <span class="s2">&quot;Param: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-parameters">
+<h3>Setting parameters<a class="headerlink" href="#setting-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Vehicle parameters are set as shown in the code fragment below, using the parameter name as a “key”:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change the parameter value (Copter, Rover)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="listing-all-parameters">
+<span id="vehicle-state-iterating-parameters"></span><h3>Listing all parameters<a class="headerlink" href="#listing-all-parameters" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../automodule.html#dronekit.Vehicle.parameters" title="dronekit.Vehicle.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.parameters</span></code></a> can be iterated to list all parameters and their values:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Print all parameters (iterate `vehicle.parameters`):&quot;</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="nb">print</span> <span class="s2">&quot; Key:</span><span class="si">%s</span><span class="s2"> Value:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="observing-parameter-changes">
+<span id="vehicle-state-observing-parameters"></span><h3>Observing parameter changes<a class="headerlink" href="#observing-parameter-changes" title="Permalink to this headline">¶</a></h3>
+<p>You can observe any of the vehicle parameters and monitor for changes without the need for polling.
+The parameters are cached, so that callback functions are only invoked when parameter values change.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Observing parameters is virtually identical to <a class="reference internal" href="#vehicle-state-observe-attributes"><span class="std std-ref">observing attributes</span></a>.</p>
+</div>
+<p>The code snippet below shows how to add a callback function to observe changes in the “THR_MIN”
+parameter using a decorator. Note that the parameter name is case-insensitive, and that callbacks
+added using a decorator cannot be removed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@vehicle.parameters.on_attribute</span><span class="p">(</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">decorated_thr_min_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot; PARAMETER CALLBACK: </span><span class="si">%s</span><span class="s2"> changed to: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">observer</span></code> callback function is invoked with the following arguments:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">self</span></code> - the associated <code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">attr_name</span></code> - the parameter name
+(useful if the same callback is used for watching several parameters).</li>
+<li><code class="docutils literal notranslate"><span class="pre">msg</span></code> - the parameter value (so you don’t need to re-query the <code class="docutils literal notranslate"><span class="pre">Vehicle.parameters</span></code> object).</li>
+</ul>
+<p>The code snippet below demonstrates how you can add and remove a listener (in this case
+for “any parameter”) using the
+<a class="reference internal" href="../automodule.html#dronekit.Parameters.add_attribute_listener" title="dronekit.Parameters.add_attribute_listener"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameters.add_attribute_listener()</span></code></a> and
+<a class="reference internal" href="../automodule.html#dronekit.Parameters.remove_attribute_listener" title="dronekit.Parameters.remove_attribute_listener"><code class="xref py py-func docutils literal notranslate"><span class="pre">Parameters.remove_attribute_listener()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Callback function for &quot;any&quot; parameter</span>
+<span class="k">def</span> <span class="nf">any_parameter_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&quot; ANY PARAMETER CALLBACK: </span><span class="si">%s</span><span class="s2"> changed to: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="c1">#Add observer for the vehicle&#39;s any/all parameters parameter (note wildcard string ``&#39;*&#39;``)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">any_parameter_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="known-issues">
+<span id="api-information-known-issues"></span><h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<p>Known issues and improvement suggestions can viewed on <a class="reference external" href="https://github.com/dronekit/dronekit-python/issues">Github here</a>.</p>
+</div>
+</div>
+
+
+					<footer id="footer">
+						
+	<div class="footer-buttons" role="navigation" aria-label="footer navigation">
+		
+			<a href="taking_off.html" class="btn btn-default pull-right" title="Taking Off">
+				Next <span class="fa fa-arrow-circle-right"></span>
+			</a>
+		
+		
+			<a href="connecting_vehicle.html" class="btn btn-default" title="Connecting to a Vehicle">
+				<span class="fa fa-arrow-circle-left"></span> Previous
+			</a>
+		
+	</div>
+
+
+<hr/>
+
+<div role="contentinfo">
+	<p>
+				&copy; Copyright 2015-2016, 3D Robotics.
+	</p>
+</div>
+Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/3drobotics/sphinx_3dr_theme">theme</a> provided by <a href="https://3drobotics.com/">3D Robotics</a> for <a href="http://dronekit.io/">DroneKit</a>.
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+		<script type="text/javascript" src="../_static/js/jquery.js"></script>
+		<script type="text/javascript" src="../_static/js/scroll.js"></script>
+		<script type="text/javascript" src="../_static/underscore.js"></script>
+		<script type="text/javascript" src="../_static/doctools.js"></script>
+		<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../_static/js/cool-select.js"></script>
+		<script type="text/javascript" src="../_static/searchtools.js"></script>
+	
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-39974306-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/guide/vehicle_state_and_parameters.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:38 GMT -->
+</html>

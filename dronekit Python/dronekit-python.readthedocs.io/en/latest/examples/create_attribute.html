@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/examples/create_attribute.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:43 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+		<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+	
+		<link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+	
+
+	<link rel="stylesheet" href="../_static/css/style.css" />
+	<script src="../_static/js/modernizr.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+
+	
+		<title>Example: Create Attribute in App</title>
+	
+
+	<script type="text/javascript">
+		var DOCUMENTATION_OPTIONS = {
+			URL_ROOT: '',
+			VERSION: '2.4.0',
+			COLLAPSE_INDEX: false,
+			FILE_SUFFIX: '.html',
+			HAS_SOURCE: true
+		};
+	</script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="create_attribute.html" />
+
+<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="../_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "examples/create_attribute"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="../../../../assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+<body>
+	<nav id="topnav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed icon-facebook-sign" type="button" data-toggle="collapse" data-target="#collapsable-topnav">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="http://dronekit.io/">
+					<img src="../_static/images/new-DK-logo-color.svg" alt="3DR">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="collapsable-topnav">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://cloud.dronekit.io/" class="cloud">Cloud</a>
+					</li>
+					<li>
+						<a href="http://python.dronekit.io/" class="air">Python</a>
+					</li>
+					<li>
+						<a href="http://android.dronekit.io/" class="ground">Android</a>
+					</li>
+					<li>
+						<a href="http://dronekit.io/support" class="support">Support</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row gray-bg">
+			<div class="col-sm-3 col-md-2 col-sidebar">
+
+        
+					
+	<div id="sidebar-search" role="search">
+		<form id="rtd-search-form" class="form-inline" action="https://dronekit-python.readthedocs.io/en/latest/search.html" method="get">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input class="form-control" type="text" name="q" placeholder="Search..." />
+			</div>
+			<input type="hidden" name="check_keywords" value="yes" />
+			<input type="hidden" name="area" value="default" />
+		</form>
+	</div>
+        
+				<div id="gray-sidebar" class="container-fluid">
+	        
+	          
+	          
+	              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about/overview.html">About DroneKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#open-source-community">Open source community</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#api-features">API features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/release_notes.html">Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#latest-release">Latest release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#changelog">Changelog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-1-2017-04-21">Version 2.9.1 (2017-04-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-0-2016-08-29">Version 2.9.0 (2016-08-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-8-0-2016-07-15">Version 2.8.0 (2016-07-15)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-7-0-2016-06-21">Version 2.7.0 (2016-06-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-6-0-2016-06-17">Version 2.6.0 (2016-06-17)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-5-0-2016-05-04">Version 2.5.0 (2016-05-04)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-4-0-2016-02-29">Version 2.4.0 (2016-02-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-3-0-2016-02-26">Version 2.3.0 (2016-02-26)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-2-0-2016-02-19">Version 2.2.0 (2016-02-19)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-1-0-2016-02-16">Version 2.1.0 (2016-02-16)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-2-2015-11-30">Version 2.0.2 (2015-11-30)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-0-2015-11-23">Version 2.0.0 (2015-11-23)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#all-releases">All releases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#working-with-releases">Working with releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/migrating.html">Migrating to DKPY 2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#code-changes">Code changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connecting-to-a-vehicle">Connecting to a vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connection-status-checks">Connection status checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#script-completion-checks">Script completion checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#command-line-arguments">Command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#current-script-directory">Current script directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#vehicle-location">Vehicle.location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#takeoff-and-movement-commands">Takeoff and movement commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#home-location">Home location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#missions-and-waypoints">Missions and Waypoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#parameter-changes">Parameter changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#intercepting-mavlink-messages">Intercepting MAVLink Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#new-attributes">New attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#channel-overrides">Channel Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/license.html">Open Source Licence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#basic-hello-drone">Basic “Hello Drone”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/index.html">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop/installation.html">Installing DroneKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/companion-computers.html">Companion Computers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#raspberrypi">RaspberryPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#intel-edison">Intel Edison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#beagleboneblack">BeagleBoneBlack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#odroid">Odroid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/sitl_setup.html">Simulated Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl">DroneKit-SITL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#running-sitl">Running SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#connecting-to-dronekit-sitl">Connecting to DroneKit-SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl-python-api">DroneKit-SITL Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#building-sitl-from-source">Building SITL from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#connecting-an-additional-ground-station">Connecting an additional Ground Station</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/best_practice.html">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#general-considerations">General considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#connecting">Connecting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launch-sequence">Launch sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#movement-commands">Movement commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#vehicle-information">Vehicle information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#missions-and-waypoints">Missions and waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#monitor-and-react-to-state-changes">Monitor and react to state changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#sleep-the-script-when-not-needed">Sleep the script when not needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#exiting-a-script">Exiting a script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#subclass-vehicle">Subclass Vehicle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#current-script-directory">Current script directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/coding_standards.html">Coding Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/index.html">Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/connecting_vehicle.html">Connecting to a Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/connecting_vehicle.html#get-started-connect-string">Connection string options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/connecting_vehicle.html#connecting-to-multiple-vehicles">Connecting to multiple vehicles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html">Vehicle State and Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#attributes">Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#getting-attributes">Getting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#setting-attributes">Setting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#home-location">Home location</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#getting-parameters">Getting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#setting-parameters">Setting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#listing-all-parameters">Listing all parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#observing-parameter-changes">Observing parameter changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/taking_off.html">Taking Off</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/copter/guided_mode.html">Guiding and Controlling Copter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#controlling-vehicle-movement">Controlling vehicle movement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#position-control">Position control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#velocity-control">Velocity control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#acceleration-and-force-control">Acceleration and force control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#guided-mode-commands">Guided mode commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#sending-messages-commands">Sending messages/commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#supported-commands">Supported commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#setting-the-yaw">Setting the Yaw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#setting-the-roi">Setting the ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#command-acknowledgements-and-response-values">Command acknowledgements and response values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#frame-conversion-functions">Frame conversion functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#other-information">Other information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/auto_mode.html">Missions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#mission-command-overview">Mission Command Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#download-current-mission">Download current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#clearing-current-mission">Clearing current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#creating-adding-mission-commands">Creating/adding mission commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#modifying-missions">Modifying missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#running-and-monitoring-missions">Running and monitoring missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#handling-the-end-of-a-mission">Handling the end of a mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#useful-mission-functions">Useful Mission functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#load-a-mission-from-a-file">Load a mission from a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#save-a-mission-to-a-file">Save a mission to a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#get-distance-to-waypoint">Get distance to waypoint</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#useful-links">Useful Links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/debugging.html">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#pdb-the-python-debugger">pdb - The Python Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#pudb-a-full-screen-console-based-python-debugger">pudb - A full-screen, console-based Python debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#print-log-statements">Print/log statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#other-ides-debuggers">Other IDEs/debuggers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/mavlink_messages.html">MAVLink Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#creating-a-message-listener">Creating a message listener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#watching-all-messages">Watching all messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#removing-an-observer">Removing an observer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="running_examples.html">Running the Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicle_state.html">Vehicle State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="vehicle_state.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vehicle_state.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vehicle_state.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vehicle_state.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simple_goto.html">Simple Goto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="simple_goto.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simple_goto.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="simple_goto.html#takeoff">Takeoff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="simple_goto.html#flying-to-a-point-simple-goto">Flying to a point - simple_goto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="simple_goto.html#rtl-return-to-launch">RTL - Return to launch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="simple_goto.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="guided-set-speed-yaw-demo.html">Guided Movement and Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#goto-convenience-function">goto() - convenience function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#send-ned-velocity">send_ned_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#send-global-velocity">send_global_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#goto-position-target-global-int">goto_position_target_global_int()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#goto-position-target-local-ned">goto_position_target_local_ned()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#testbed-settings">Testbed settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mission_basic.html">Basic Mission</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mission_import_export.html">Mission Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Create Attribute in App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subclassing-vehicle">Subclassing Vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-the-vehicle-subclass">Using the Vehicle subclass</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="follow_me.html">Follow Me (Linux only)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="follow_me.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="follow_me.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="follow_me.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="drone_delivery.html">Drone Delivery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#screenshots">Screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="drone_delivery.html#using-attribute-observers">Using attribute observers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="drone_delivery.html#starting-cherrypy-from-a-dronekit-application">Starting CherryPy from a DroneKit application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="flight_replay.html">Flight Replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="flight_replay.html#getting-the-points">Getting the points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flight_replay.html#setting-the-new-waypoints">Setting the new waypoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="channel_overrides.html">Channel Overrides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="channel_overrides.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channel_overrides.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channel_overrides.html#source-code">Source code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/getting_started.html">How you can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_api.html">Contributing to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#test-code">Test code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#setting-up-local-testing">Setting up local testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#integration-tests">Integration tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_documentation.html">Contributing to the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#documentation-system-overview">Documentation system overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#building-the-docs">Building the docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_windows.html">Building DroneKit-Python on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#install-dronekit-using-winpython-command-line">Install DroneKit using WinPython command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_linux.html">Building DroneKit-Python on Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../automodule.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference external" href="http://python.dronekit.io/genindex.html">Index</a></li>
+</ul>
+</li>
+</ul>
+
+	          
+	        
+				</div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="api-content">
+					
+  <div class="section" id="example-create-attribute-in-app">
+<span id="example-create-attribute"></span><h1>Example: Create Attribute in App<a class="headerlink" href="#example-create-attribute-in-app" title="Permalink to this headline">¶</a></h1>
+<p>This example shows how you can subclass <a class="reference internal" href="../automodule.html#dronekit.Vehicle" title="dronekit.Vehicle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle</span></code></a> in order to support
+new attributes for MAVLink messages within your DroneKit-Python script. The new class is defined in a
+separate file (making re-use easy) and is very similar to the code used to implement the in-built attributes.
+The new attributes are used <em>in the same way</em> as the built-in
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle" title="dronekit.Vehicle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle</span></code></a> attributes.</p>
+<p>The new class uses the <a class="reference internal" href="../automodule.html#dronekit.Vehicle.on_message" title="dronekit.Vehicle.on_message"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.on_message()</span></code></a> decorator
+to set a function that is called to process a specific message, copy its values into an attribute, and notify
+observers. An observer is then set on the new attribute using
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle.add_attribute_listener" title="dronekit.Vehicle.add_attribute_listener"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.add_attribute_listener()</span></code></a>.</p>
+<p>Additional information is provided in the guide topic <a class="reference internal" href="../guide/mavlink_messages.html#mavlink-messages"><span class="std std-ref">MAVLink Messages</span></a>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>This approach is useful when you urgently need to access messages that are not yet supported as
+<a class="reference internal" href="../automodule.html#dronekit.Vehicle" title="dronekit.Vehicle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vehicle</span></code></a> attributes.</p>
+<p class="last">Please <a class="reference internal" href="../contributing/contributions_api.html#contributing-api"><span class="std std-ref">contribute your code to the API</span></a> so that it is available to
+(and can be tested by) the whole DroneKit-Python community.</p>
+</div>
+<div class="section" id="running-the-example">
+<h2>Running the example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<p>The example can be run as described in <a class="reference internal" href="running_examples.html"><span class="doc">Running the Examples</span></a> (which in turn assumes that the vehicle
+and DroneKit have been set up as described in <a class="reference internal" href="../develop/installation.html#installing-dronekit"><span class="std std-ref">Installing DroneKit</span></a>).</p>
+<p>In summary, after cloning the repository:</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the example folder as shown:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> dronekit-python<span class="se">\e</span>xamples<span class="se">\c</span>reate_attribute<span class="se">\</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can run the example against a simulator (DroneKit-SITL) by specifying the Python script without any arguments.
+The example will download SITL binaries (if needed), start the simulator, and then connect to it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python create_attribute.py
+</pre></div>
+</div>
+<p>On the command prompt you should see (something like):</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Starting</span> <span class="n">copter</span> <span class="n">simulator</span> <span class="p">(</span><span class="n">SITL</span><span class="p">)</span>
+<span class="n">SITL</span> <span class="n">already</span> <span class="n">Downloaded</span><span class="o">.</span>
+<span class="n">Connecting</span> <span class="n">to</span> <span class="n">vehicle</span> <span class="n">on</span><span class="p">:</span> <span class="n">tcp</span><span class="p">:</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5760</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">APM</span><span class="p">:</span><span class="n">Copter</span> <span class="n">V3</span><span class="o">.</span><span class="mi">3</span> <span class="p">(</span><span class="n">d6053245</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Frame</span><span class="p">:</span> <span class="n">QUAD</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Calibrating</span> <span class="n">barometer</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Initialising</span> <span class="n">APM</span><span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">barometer</span> <span class="n">calibration</span> <span class="n">complete</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">GROUND</span> <span class="n">START</span>
+<span class="n">Display</span> <span class="n">RAW_IMU</span> <span class="n">messages</span> <span class="k">for</span> <span class="mi">5</span> <span class="n">seconds</span> <span class="ow">and</span> <span class="n">then</span> <span class="n">exit</span><span class="o">.</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">15340000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">15580000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">15820000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">16060000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">16300000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">16540000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">16780000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">17020000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">17260000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">17500000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">17740000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">17980000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">18220000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">18460000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">18700000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">18940000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">19180000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">19420000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">19660000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">154</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">52</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">19900000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">154</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">52</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">RAW_IMU</span><span class="p">:</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="mi">20140000</span><span class="p">,</span><span class="n">xacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">yacc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zacc</span><span class="o">=-</span><span class="mi">1000</span><span class="p">,</span><span class="n">xgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ygyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">zgyro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmag</span><span class="o">=</span><span class="mi">154</span><span class="p">,</span><span class="n">ymag</span><span class="o">=</span><span class="mi">52</span><span class="p">,</span><span class="n">zmag</span><span class="o">=-</span><span class="mi">365</span>
+<span class="n">Close</span> <span class="n">vehicle</span> <span class="nb">object</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can run the example against a specific connection (simulated or otherwise) by passing the <a class="reference internal" href="../guide/connecting_vehicle.html#get-started-connect-string"><span class="std std-ref">connection string</span></a> for your vehicle in the <code class="docutils literal notranslate"><span class="pre">--connect</span></code> parameter.</p>
+<p>For example, to connect to SITL running on UDP port 14550 on your local computer:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python create_attribute.py --connect <span class="m">127</span>.0.0.1:14550
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="how-does-it-work">
+<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="subclassing-vehicle">
+<h3>Subclassing Vehicle<a class="headerlink" href="#subclassing-vehicle" title="Permalink to this headline">¶</a></h3>
+<p>The example file <strong>my_vehicle.py</strong> defines a class for the new attribute (<code class="docutils literal notranslate"><span class="pre">RawIMU</span></code>) and a new vehicle subclass (<code class="docutils literal notranslate"><span class="pre">MyVehicle</span></code>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The example uses the same documentation markup used by the native code, which can be generated into a document set using
+Sphinx/autodoc.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">RawIMU</span></code> has members for each of the values in the message
+(in this case <a class="reference external" href="http://mavlink.org/messages/common#RAW_IMU">RAW_IMU</a>). It provides an initialiser that sets all the values to
+<code class="docutils literal notranslate"><span class="pre">None</span></code> and a string representation for printing the object.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RawIMU</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The RAW IMU readings for the usual 9DOF sensor setup.</span>
+<span class="sd">    This contains the true raw values without any scaling to allow data capture and system debugging.</span>
+
+<span class="sd">    The message definition is here: http://mavlink.org/messages/common#RAW_IMU</span>
+
+<span class="sd">    :param time_boot_us: Timestamp (microseconds since system boot). #Note, not milliseconds as per spec</span>
+<span class="sd">    :param xacc: X acceleration (mg)</span>
+<span class="sd">    :param yacc: Y acceleration (mg)</span>
+<span class="sd">    :param zacc: Z acceleration (mg)</span>
+<span class="sd">    :param xgyro: Angular speed around X axis (millirad /sec)</span>
+<span class="sd">    :param ygyro: Angular speed around Y axis (millirad /sec)</span>
+<span class="sd">    :param zgyro: Angular speed around Z axis (millirad /sec)</span>
+<span class="sd">    :param xmag: X Magnetic field (milli tesla)</span>
+<span class="sd">    :param ymag: Y Magnetic field (milli tesla)</span>
+<span class="sd">    :param zmag: Z Magnetic field (milli tesla)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xacc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yacc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zacc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xygro</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ygyro</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zgyro</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xmag</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ymag</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zmag</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        RawIMU object constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_boot_us</span> <span class="o">=</span> <span class="n">time_boot_us</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xacc</span> <span class="o">=</span> <span class="n">xacc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yacc</span> <span class="o">=</span> <span class="n">yacc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zacc</span> <span class="o">=</span> <span class="n">zacc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xgyro</span> <span class="o">=</span> <span class="n">zgyro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ygyro</span> <span class="o">=</span> <span class="n">ygyro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zgyro</span> <span class="o">=</span> <span class="n">zgyro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmag</span> <span class="o">=</span> <span class="n">xmag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ymag</span> <span class="o">=</span> <span class="n">ymag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zmag</span> <span class="o">=</span> <span class="n">zmag</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        String representation of the RawIMU object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;RAW_IMU: time_boot_us=</span><span class="si">{}</span><span class="s2">,xacc=</span><span class="si">{}</span><span class="s2">,yacc=</span><span class="si">{}</span><span class="s2">,zacc=</span><span class="si">{}</span><span class="s2">,xgyro=</span><span class="si">{}</span><span class="s2">,ygyro=</span><span class="si">{}</span><span class="s2">,zgyro=</span><span class="si">{}</span><span class="s2">,xmag=</span><span class="si">{}</span><span class="s2">,ymag=</span><span class="si">{}</span><span class="s2">,zmag=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_boot_us</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xacc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yacc</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">zacc</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">xgyro</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ygyro</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">zgyro</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">xmag</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ymag</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">zmag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MyVehicle</span></code> is a superclass of <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> (and hence inherits all its attributes).
+This first creates a private instance of <code class="docutils literal notranslate"><span class="pre">RawIMU</span></code>.</p>
+<p>We create a listener using the <a class="reference internal" href="../automodule.html#dronekit.Vehicle.on_message" title="dronekit.Vehicle.on_message"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.on_message()</span></code></a>
+decorator. The listener is called for messages that contain the string “RAW_IMU”,
+with arguments for the vehicle, message name, and the message. It copies the message information into
+the attribute and then notifies all observers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyVehicle</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyVehicle</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="c1"># Create an Vehicle.raw_imu object with initial values set to None.</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span> <span class="o">=</span> <span class="n">RawIMU</span><span class="p">()</span>
+</span>
+        <span class="c1"># Create a message listener using the decorator.</span>
+<span class="hll">        <span class="nd">@self.on_message</span><span class="p">(</span><span class="s1">&#39;RAW_IMU&#39;</span><span class="p">)</span>
+</span><span class="hll">        <span class="k">def</span> <span class="nf">listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+</span>            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            The listener is called for messages that contain the string specified in the decorator,</span>
+<span class="sd">            passing the vehicle, message name, and the message.</span>
+
+<span class="sd">            The listener writes the message to the (newly attached) ``vehicle.raw_imu`` object</span>
+<span class="sd">            and notifies observers.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">time_boot_us</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">time_usec</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">xacc</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">xacc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">yacc</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">yacc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">zacc</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">zacc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">xgyro</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">xgyro</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">ygyro</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">ygyro</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">zgyro</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">zgyro</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">xmag</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">xmag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">ymag</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">ymag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">zmag</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">zmag</span>
+
+            <span class="c1"># Notify all observers of new message (with new value)</span>
+            <span class="c1">#   Note that argument `cache=False` by default so listeners</span>
+            <span class="c1">#   are updaed with every new message</span>
+<span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">notify_attribute_listeners</span><span class="p">(</span><span class="s1">&#39;raw_imu&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="p">)</span>
+</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">raw_imu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The notifier function (<a class="reference internal" href="../automodule.html#dronekit.Vehicle.notify_attribute_listeners" title="dronekit.Vehicle.notify_attribute_listeners"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.notify_attribute_listeners()</span></code></a>)
+should be called every time there is an update from the vehicle.</p>
+<p>You can set a third parameter (<code class="docutils literal notranslate"><span class="pre">cache=True</span></code>) so that it only invokes the listeners when the value <em>changes</em>.
+This is normally used for attributes like the vehicle mode, where the information is updated
+regularly from the vehicle, but client code is only interested when the attribute changes.</p>
+<p class="last">You should not set <code class="docutils literal notranslate"><span class="pre">cache=True</span></code> for attributes that represent sensor information or other “live” information, including
+the RAW_IMU attribute demonstrated here. Clients can then implement their own caching strategy if needed.</p>
+</div>
+<p>At the end of the class we create the public properly <code class="docutils literal notranslate"><span class="pre">raw_imu</span></code> which client code may read and observe.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The decorator pattern means that you can have multiple listeners for a particular message or for different
+messages and they can all have the same function name/prototype (in this case <code class="docutils literal notranslate"><span class="pre">listener(self,</span> <span class="pre">name,</span> <span class="pre">message</span></code>).</p>
+</div>
+</div>
+<div class="section" id="using-the-vehicle-subclass">
+<h3>Using the Vehicle subclass<a class="headerlink" href="#using-the-vehicle-subclass" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>create_attribute.py</strong> file first imports the <code class="docutils literal notranslate"><span class="pre">MyVehicle</span></code> class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dronekit</span> <span class="kn">import</span> <span class="n">connect</span><span class="p">,</span> <span class="n">Vehicle</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">my_vehicle</span> <span class="kn">import</span> <span class="n">MyVehicle</span> <span class="c1">#Our custom vehicle class</span>
+</span><span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+<p>We then call <code class="docutils literal notranslate"><span class="pre">connect()</span></code>, specifying this new class in the <code class="docutils literal notranslate"><span class="pre">vehicle_class</span></code> argument.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to our custom vehicle_class `MyVehicle` at address `args.connect`</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">connect</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">vehicle_class</span><span class="o">=</span><span class="n">MyVehicle</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">connect()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">MyVehicle</span></code> class which can be used in <em>exactly the same way</em> as <code class="docutils literal notranslate"><span class="pre">Vehicle</span></code> but with an
+additional attribute <code class="docutils literal notranslate"><span class="pre">raw_imu</span></code>. You can query the attribute to get any of its members, and even add an observer as shown:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add observer for the custom attribute</span>
+
+<span class="k">def</span> <span class="nf">raw_imu_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="c1"># attr_name == &#39;raw_imu&#39;</span>
+    <span class="c1"># value == vehicle.raw_imu</span>
+    <span class="nb">print</span> <span class="n">value</span>
+
+<span class="n">vehicle</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;raw_imu&#39;</span><span class="p">,</span> <span class="n">raw_imu_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<p>This code has no known issues.</p>
+</div>
+<div class="section" id="source-code">
+<h2>Source code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<p>The full source code at documentation build-time is listed below (<a class="reference external" href="https://github.com/dronekit/dronekit-python/blob/master/examples/create_attribute/create_attribute.py">current version on github</a>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">© Copyright 2015-2016, 3D Robotics.</span>
+
+<span class="sd">create_attribute.py:</span>
+
+<span class="sd">Demonstrates how to create attributes from MAVLink messages within your DroneKit-Python script </span>
+<span class="sd">and use them in the same way as the built-in Vehicle attributes.</span>
+
+<span class="sd">The code adds a new attribute to the Vehicle class, populating it with information from RAW_IMU messages </span>
+<span class="sd">intercepted using the message_listener decorator.</span>
+
+<span class="sd">Full documentation is provided at http://python.dronekit.io/examples/create_attribute.html</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">from</span> <span class="nn">dronekit</span> <span class="kn">import</span> <span class="n">connect</span><span class="p">,</span> <span class="n">Vehicle</span>
+<span class="kn">from</span> <span class="nn">my_vehicle</span> <span class="kn">import</span> <span class="n">MyVehicle</span> <span class="c1">#Our custom vehicle class</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+
+<span class="c1">#Set up option parsing to get connection string</span>
+<span class="kn">import</span> <span class="nn">argparse</span>  
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Demonstrates how to create attributes from MAVLink messages. &#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--connect&#39;</span><span class="p">,</span> 
+                   <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Vehicle connection target string. If not specified, SITL automatically started and used.&quot;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="n">connection_string</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">connect</span>
+<span class="n">sitl</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+<span class="c1">#Start SITL if no connection string specified</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">connection_string</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">dronekit_sitl</span>
+    <span class="n">sitl</span> <span class="o">=</span> <span class="n">dronekit_sitl</span><span class="o">.</span><span class="n">start_default</span><span class="p">()</span>
+    <span class="n">connection_string</span> <span class="o">=</span> <span class="n">sitl</span><span class="o">.</span><span class="n">connection_string</span><span class="p">()</span>
+
+
+<span class="c1"># Connect to the Vehicle</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Connecting to vehicle on: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">connection_string</span><span class="p">)</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">connection_string</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">vehicle_class</span><span class="o">=</span><span class="n">MyVehicle</span><span class="p">)</span>
+
+<span class="c1"># Add observer for the custom attribute</span>
+
+<span class="k">def</span> <span class="nf">raw_imu_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="c1"># attr_name == &#39;raw_imu&#39;</span>
+    <span class="c1"># value == vehicle.raw_imu</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="n">vehicle</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;raw_imu&#39;</span><span class="p">,</span> <span class="n">raw_imu_callback</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Display RAW_IMU messages for 5 seconds and then exit.&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1">#The message listener can be unset using ``vehicle.remove_message_listener``</span>
+
+<span class="c1">#Close vehicle object before exiting script</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Close vehicle object&quot;</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Shut down simulator if it was started.</span>
+<span class="k">if</span> <span class="n">sitl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">sitl</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">© Copyright 2015-2016, 3D Robotics.</span>
+
+<span class="sd">my_vehicle.py:</span>
+
+<span class="sd">Custom Vehicle subclass to add IMU data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dronekit</span> <span class="kn">import</span> <span class="n">Vehicle</span>
+
+
+<span class="k">class</span> <span class="nc">RawIMU</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The RAW IMU readings for the usual 9DOF sensor setup. </span>
+<span class="sd">    This contains the true raw values without any scaling to allow data capture and system debugging.</span>
+<span class="sd">    </span>
+<span class="sd">    The message definition is here: https://mavlink.io/en/messages/common.html#RAW_IMU</span>
+<span class="sd">    </span>
+<span class="sd">    :param time_boot_us: Timestamp (microseconds since system boot). #Note, not milliseconds as per spec</span>
+<span class="sd">    :param xacc: X acceleration (mg)</span>
+<span class="sd">    :param yacc: Y acceleration (mg)</span>
+<span class="sd">    :param zacc: Z acceleration (mg)</span>
+<span class="sd">    :param xgyro: Angular speed around X axis (millirad /sec)</span>
+<span class="sd">    :param ygyro: Angular speed around Y axis (millirad /sec)</span>
+<span class="sd">    :param zgyro: Angular speed around Z axis (millirad /sec)</span>
+<span class="sd">    :param xmag: X Magnetic field (milli tesla)</span>
+<span class="sd">    :param ymag: Y Magnetic field (milli tesla)</span>
+<span class="sd">    :param zmag: Z Magnetic field (milli tesla)    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_boot_us</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">xacc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">yacc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">zacc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">xygro</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ygyro</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">zgyro</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">xmag</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ymag</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">zmag</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        RawIMU object constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_boot_us</span> <span class="o">=</span> <span class="n">time_boot_us</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xacc</span> <span class="o">=</span> <span class="n">xacc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yacc</span> <span class="o">=</span> <span class="n">yacc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zacc</span> <span class="o">=</span> <span class="n">zacc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xgyro</span> <span class="o">=</span> <span class="n">zgyro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ygyro</span> <span class="o">=</span> <span class="n">ygyro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zgyro</span> <span class="o">=</span> <span class="n">zgyro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmag</span> <span class="o">=</span> <span class="n">xmag</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">ymag</span> <span class="o">=</span> <span class="n">ymag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zmag</span> <span class="o">=</span> <span class="n">zmag</span>      
+        
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        String representation used to print the RawIMU object. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;RAW_IMU: time_boot_us={},xacc={},yacc={},zacc={},xgyro={},ygyro={},zgyro={},xmag={},ymag={},zmag={}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_boot_us</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xacc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yacc</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">zacc</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">xgyro</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ygyro</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">zgyro</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">xmag</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ymag</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">zmag</span><span class="p">)</span>
+
+   
+<span class="k">class</span> <span class="nc">MyVehicle</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyVehicle</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="c1"># Create an Vehicle.raw_imu object with initial values set to None.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span> <span class="o">=</span> <span class="n">RawIMU</span><span class="p">()</span>
+
+        <span class="c1"># Create a message listener using the decorator.   </span>
+        <span class="nd">@self.on_message</span><span class="p">(</span><span class="s1">&#39;RAW_IMU&#39;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">listener</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            The listener is called for messages that contain the string specified in the decorator,</span>
+<span class="sd">            passing the vehicle, message name, and the message.</span>
+<span class="sd">            </span>
+<span class="sd">            The listener writes the message to the (newly attached) ``vehicle.raw_imu`` object </span>
+<span class="sd">            and notifies observers.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">time_boot_us</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">time_usec</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">xacc</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">xacc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">yacc</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">yacc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">zacc</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">zacc</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">xgyro</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">xgyro</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">ygyro</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">ygyro</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">zgyro</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">zgyro</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">xmag</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">xmag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">ymag</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">ymag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="o">.</span><span class="n">zmag</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">zmag</span>
+            
+            <span class="c1"># Notify all observers of new message (with new value)</span>
+            <span class="c1">#   Note that argument `cache=False` by default so listeners</span>
+            <span class="c1">#   are updated with every new message</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notify_attribute_listeners</span><span class="p">(</span><span class="s1">&#39;raw_imu&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span><span class="p">)</span> 
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">raw_imu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_imu</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+					<footer id="footer">
+						
+	<div class="footer-buttons" role="navigation" aria-label="footer navigation">
+		
+			<a href="follow_me.html" class="btn btn-default pull-right" title="Example: Follow Me">
+				Next <span class="fa fa-arrow-circle-right"></span>
+			</a>
+		
+		
+			<a href="mission_import_export.html" class="btn btn-default" title="Example: Mission Import/Export">
+				<span class="fa fa-arrow-circle-left"></span> Previous
+			</a>
+		
+	</div>
+
+
+<hr/>
+
+<div role="contentinfo">
+	<p>
+				&copy; Copyright 2015-2016, 3D Robotics.
+	</p>
+</div>
+Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/3drobotics/sphinx_3dr_theme">theme</a> provided by <a href="https://3drobotics.com/">3D Robotics</a> for <a href="http://dronekit.io/">DroneKit</a>.
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+		<script type="text/javascript" src="../_static/js/jquery.js"></script>
+		<script type="text/javascript" src="../_static/js/scroll.js"></script>
+		<script type="text/javascript" src="../_static/underscore.js"></script>
+		<script type="text/javascript" src="../_static/doctools.js"></script>
+		<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../_static/js/cool-select.js"></script>
+		<script type="text/javascript" src="../_static/searchtools.js"></script>
+	
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-39974306-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/examples/create_attribute.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:43 GMT -->
+</html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/guide/copter/guided_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:38 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+		<link rel="stylesheet" href="../../../../../assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+	
+		<link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+	
+
+	<link rel="stylesheet" href="../../_static/css/style.css" />
+	<script src="../../_static/js/modernizr.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+
+	
+		<title>Guiding and Controlling Copter</title>
+	
+
+	<script type="text/javascript">
+		var DOCUMENTATION_OPTIONS = {
+			URL_ROOT: '',
+			VERSION: '2.4.0',
+			COLLAPSE_INDEX: false,
+			FILE_SUFFIX: '.html',
+			HAS_SOURCE: true
+		};
+	</script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="guided_mode.html" />
+
+<link rel="stylesheet" href="../../../../../assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="../../_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "guide/copter/guided_mode"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="../../../../../assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+<body>
+	<nav id="topnav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed icon-facebook-sign" type="button" data-toggle="collapse" data-target="#collapsable-topnav">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="http://dronekit.io/">
+					<img src="../../_static/images/new-DK-logo-color.svg" alt="3DR">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="collapsable-topnav">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://cloud.dronekit.io/" class="cloud">Cloud</a>
+					</li>
+					<li>
+						<a href="http://python.dronekit.io/" class="air">Python</a>
+					</li>
+					<li>
+						<a href="http://android.dronekit.io/" class="ground">Android</a>
+					</li>
+					<li>
+						<a href="http://dronekit.io/support" class="support">Support</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row gray-bg">
+			<div class="col-sm-3 col-md-2 col-sidebar">
+
+        
+					
+	<div id="sidebar-search" role="search">
+		<form id="rtd-search-form" class="form-inline" action="https://dronekit-python.readthedocs.io/en/latest/search.html" method="get">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input class="form-control" type="text" name="q" placeholder="Search..." />
+			</div>
+			<input type="hidden" name="check_keywords" value="yes" />
+			<input type="hidden" name="area" value="default" />
+		</form>
+	</div>
+        
+				<div id="gray-sidebar" class="container-fluid">
+	        
+	          
+	          
+	              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../about/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../about/overview.html">About DroneKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../about/overview.html#open-source-community">Open source community</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/overview.html#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/overview.html#api-features">API features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/overview.html#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../about/release_notes.html">Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../about/release_notes.html#latest-release">Latest release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/release_notes.html#changelog">Changelog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-9-1-2017-04-21">Version 2.9.1 (2017-04-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-9-0-2016-08-29">Version 2.9.0 (2016-08-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-8-0-2016-07-15">Version 2.8.0 (2016-07-15)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-7-0-2016-06-21">Version 2.7.0 (2016-06-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-6-0-2016-06-17">Version 2.6.0 (2016-06-17)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-5-0-2016-05-04">Version 2.5.0 (2016-05-04)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-4-0-2016-02-29">Version 2.4.0 (2016-02-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-3-0-2016-02-26">Version 2.3.0 (2016-02-26)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-2-0-2016-02-19">Version 2.2.0 (2016-02-19)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-1-0-2016-02-16">Version 2.1.0 (2016-02-16)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-0-2-2015-11-30">Version 2.0.2 (2015-11-30)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/release_notes.html#version-2-0-0-2015-11-23">Version 2.0.0 (2015-11-23)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/release_notes.html#all-releases">All releases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/release_notes.html#working-with-releases">Working with releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../about/migrating.html">Migrating to DKPY 2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../about/migrating.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/migrating.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/migrating.html#code-changes">Code changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#connecting-to-a-vehicle">Connecting to a vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#connection-status-checks">Connection status checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#script-completion-checks">Script completion checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#command-line-arguments">Command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#current-script-directory">Current script directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#vehicle-location">Vehicle.location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#takeoff-and-movement-commands">Takeoff and movement commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#home-location">Home location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#missions-and-waypoints">Missions and Waypoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#parameter-changes">Parameter changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#intercepting-mavlink-messages">Intercepting MAVLink Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#new-attributes">New attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../about/migrating.html#channel-overrides">Channel Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../about/migrating.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../about/license.html">Open Source Licence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start.html#basic-hello-drone">Basic “Hello Drone”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quick_start.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../develop/index.html">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../develop/installation.html">Installing DroneKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../develop/companion-computers.html">Companion Computers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/companion-computers.html#raspberrypi">RaspberryPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/companion-computers.html#intel-edison">Intel Edison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/companion-computers.html#beagleboneblack">BeagleBoneBlack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/companion-computers.html#odroid">Odroid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../develop/sitl_setup.html">Simulated Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/sitl_setup.html#dronekit-sitl">DroneKit-SITL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../develop/sitl_setup.html#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../develop/sitl_setup.html#running-sitl">Running SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../develop/sitl_setup.html#connecting-to-dronekit-sitl">Connecting to DroneKit-SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../develop/sitl_setup.html#dronekit-sitl-python-api">DroneKit-SITL Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/sitl_setup.html#building-sitl-from-source">Building SITL from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/sitl_setup.html#connecting-an-additional-ground-station">Connecting an additional Ground Station</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../develop/best_practice.html">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#general-considerations">General considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#connecting">Connecting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#launch-sequence">Launch sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#movement-commands">Movement commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#vehicle-information">Vehicle information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#missions-and-waypoints">Missions and waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#monitor-and-react-to-state-changes">Monitor and react to state changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#sleep-the-script-when-not-needed">Sleep the script when not needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#exiting-a-script">Exiting a script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#subclass-vehicle">Subclass Vehicle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../develop/best_practice.html#current-script-directory">Current script directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../develop/coding_standards.html">Coding Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../connecting_vehicle.html">Connecting to a Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../connecting_vehicle.html#get-started-connect-string">Connection string options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../connecting_vehicle.html#connecting-to-multiple-vehicles">Connecting to multiple vehicles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../vehicle_state_and_parameters.html">Vehicle State and Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../vehicle_state_and_parameters.html#attributes">Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#getting-attributes">Getting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#setting-attributes">Setting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#home-location">Home location</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../vehicle_state_and_parameters.html#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#getting-parameters">Getting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#setting-parameters">Setting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#listing-all-parameters">Listing all parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../vehicle_state_and_parameters.html#observing-parameter-changes">Observing parameter changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../vehicle_state_and_parameters.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../taking_off.html">Taking Off</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Guiding and Controlling Copter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controlling-vehicle-movement">Controlling vehicle movement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#position-control">Position control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velocity-control">Velocity control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acceleration-and-force-control">Acceleration and force control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#guided-mode-commands">Guided mode commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sending-messages-commands">Sending messages/commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#supported-commands">Supported commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-the-yaw">Setting the Yaw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-the-roi">Setting the ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#command-acknowledgements-and-response-values">Command acknowledgements and response values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frame-conversion-functions">Frame conversion functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-information">Other information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_mode.html">Missions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#mission-command-overview">Mission Command Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#download-current-mission">Download current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#clearing-current-mission">Clearing current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#creating-adding-mission-commands">Creating/adding mission commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#modifying-missions">Modifying missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#running-and-monitoring-missions">Running and monitoring missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#handling-the-end-of-a-mission">Handling the end of a mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#useful-mission-functions">Useful Mission functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_mode.html#load-a-mission-from-a-file">Load a mission from a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_mode.html#save-a-mission-to-a-file">Save a mission to a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_mode.html#get-distance-to-waypoint">Get distance to waypoint</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_mode.html#useful-links">Useful Links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging.html">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../debugging.html#pdb-the-python-debugger">pdb - The Python Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging.html#pudb-a-full-screen-console-based-python-debugger">pudb - A full-screen, console-based Python debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging.html#print-log-statements">Print/log statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging.html#other-ides-debuggers">Other IDEs/debuggers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../mavlink_messages.html">MAVLink Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../mavlink_messages.html#creating-a-message-listener">Creating a message listener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mavlink_messages.html#watching-all-messages">Watching all messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mavlink_messages.html#removing-an-observer">Removing an observer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/running_examples.html">Running the Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/vehicle_state.html">Vehicle State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/vehicle_state.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/vehicle_state.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/vehicle_state.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/vehicle_state.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/simple_goto.html">Simple Goto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/simple_goto.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/simple_goto.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/simple_goto.html#takeoff">Takeoff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/simple_goto.html#flying-to-a-point-simple-goto">Flying to a point - simple_goto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/simple_goto.html#rtl-return-to-launch">RTL - Return to launch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/simple_goto.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html">Guided Movement and Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#goto-convenience-function">goto() - convenience function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#send-ned-velocity">send_ned_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#send-global-velocity">send_global_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#goto-position-target-global-int">goto_position_target_global_int()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#goto-position-target-local-ned">goto_position_target_local_ned()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#testbed-settings">Testbed settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/mission_basic.html">Basic Mission</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_basic.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_basic.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_basic.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_basic.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/mission_import_export.html">Mission Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_import_export.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_import_export.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_import_export.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/mission_import_export.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/create_attribute.html">Create Attribute in App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/create_attribute.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/create_attribute.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/create_attribute.html#subclassing-vehicle">Subclassing Vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/create_attribute.html#using-the-vehicle-subclass">Using the Vehicle subclass</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/create_attribute.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/create_attribute.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/follow_me.html">Follow Me (Linux only)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/follow_me.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/follow_me.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/follow_me.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/drone_delivery.html">Drone Delivery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/drone_delivery.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/drone_delivery.html#screenshots">Screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/drone_delivery.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/drone_delivery.html#using-attribute-observers">Using attribute observers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/drone_delivery.html#starting-cherrypy-from-a-dronekit-application">Starting CherryPy from a DroneKit application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/drone_delivery.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/drone_delivery.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/flight_replay.html">Flight Replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/flight_replay.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/flight_replay.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/flight_replay.html#getting-the-points">Getting the points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../examples/flight_replay.html#setting-the-new-waypoints">Setting the new waypoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/flight_replay.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/flight_replay.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/channel_overrides.html">Channel Overrides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/channel_overrides.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/channel_overrides.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../examples/channel_overrides.html#source-code">Source code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing/getting_started.html">How you can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing/contributions_api.html">Contributing to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/contributions_api.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/contributions_api.html#test-code">Test code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../contributing/contributions_api.html#setting-up-local-testing">Setting up local testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../contributing/contributions_api.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../contributing/contributions_api.html#integration-tests">Integration tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing/contributions_documentation.html">Contributing to the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/contributions_documentation.html#documentation-system-overview">Documentation system overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/contributions_documentation.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/contributions_documentation.html#building-the-docs">Building the docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/contributions_documentation.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing/developer_setup_windows.html">Building DroneKit-Python on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/developer_setup_windows.html#install-dronekit-using-winpython-command-line">Install DroneKit using WinPython command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/developer_setup_windows.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/developer_setup_windows.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing/developer_setup_linux.html">Building DroneKit-Python on Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/developer_setup_linux.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/developer_setup_linux.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../automodule.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference external" href="http://python.dronekit.io/genindex.html">Index</a></li>
+</ul>
+</li>
+</ul>
+
+	          
+	        
+				</div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="api-content">
+					
+  <div class="section" id="guiding-and-controlling-copter">
+<span id="guided-mode-copter"></span><h1>Guiding and Controlling Copter<a class="headerlink" href="#guiding-and-controlling-copter" title="Permalink to this headline">¶</a></h1>
+<p>GUIDED mode is the recommended mode for flying Copter autonomously without a predefined a mission. It allows a Ground Control Station (GCS) or <a class="reference internal" href="../../develop/companion-computers.html#supported-companion-computers"><span class="std std-ref">Companion Computer</span></a> to control the vehicle “on the fly” and react to new events or situations as they occur.</p>
+<p>This topic explains how you can <a class="reference internal" href="#guided-mode-copter-control-movement"><span class="std std-ref">control vehicle movement</span></a>, and also how to send <a class="reference internal" href="#guided-mode-copter-commands"><span class="std std-ref">MAVLink commands</span></a> to control vehicle orientation, region of interest, servos and other hardware. We also <a class="reference internal" href="#guided-mode-copter-useful-conversion-functions"><span class="std std-ref">list a few functions</span></a> that are useful for converting location and bearings from a global into a local frame of reference.</p>
+<p>Most of the code can be observed running in <a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#example-guided-mode-setting-speed-yaw"><span class="std std-ref">Example: Guided Mode Movement and Commands (Copter)</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This topic is Copter specific. Plane apps typically use AUTO mode and dynamically modify missions as needed (Plane supports GUIDED mode but it is less full featured than on Copter).</p>
+</div>
+<div class="section" id="controlling-vehicle-movement">
+<span id="guided-mode-copter-control-movement"></span><h2>Controlling vehicle movement<a class="headerlink" href="#controlling-vehicle-movement" title="Permalink to this headline">¶</a></h2>
+<p>Copter movement can be controlled either by explicitly setting a <a class="reference internal" href="#guided-mode-copter-position-control"><span class="std std-ref">target position</span></a>, or by specifying the vehicle’s <a class="reference internal" href="#guided-mode-copter-velocity-control"><span class="std std-ref">velocity components</span></a> to guide it in a preferred direction.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Changing to a new movement method is treated as a “mode change”. If you’ve set a yaw or region-of-interest value then this will be set to the default (vehicle faces the direction of travel).</p>
+</div>
+<div class="section" id="position-control">
+<span id="guided-mode-copter-position-control"></span><h3>Position control<a class="headerlink" href="#position-control" title="Permalink to this headline">¶</a></h3>
+<p>Controlling the vehicle by explicitly setting the target position is useful when the final position is known/fixed.</p>
+<p>The recommended method for position control is <a class="reference internal" href="../../automodule.html#dronekit.Vehicle.simple_goto" title="dronekit.Vehicle.simple_goto"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.simple_goto()</span></code></a>.
+This takes a <a class="reference internal" href="../../automodule.html#dronekit.LocationGlobal" title="dronekit.LocationGlobal"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationGlobal</span></code></a> or
+<a class="reference internal" href="../../automodule.html#dronekit.LocationGlobalRelative" title="dronekit.LocationGlobalRelative"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationGlobalRelative</span></code></a> argument.</p>
+<p>The method is used as shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set mode to guided - this is optional as the goto method will change the mode if needed.</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">VehicleMode</span><span class="p">(</span><span class="s2">&quot;GUIDED&quot;</span><span class="p">)</span>
+
+<span class="c1"># Set the target location in global-relative frame</span>
+<span class="n">a_location</span> <span class="o">=</span> <span class="n">LocationGlobalRelative</span><span class="p">(</span><span class="o">-</span><span class="mf">34.364114</span><span class="p">,</span> <span class="mf">149.166022</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">simple_goto</span><span class="p">(</span><span class="n">a_location</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Vehicle.simple_goto()</span></code> can be interrupted by a later command, and does not provide any functionality
+to indicate when the vehicle has reached its destination. Developers can use either a time delay or
+<a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#example-guided-mode-goto-convenience"><span class="std std-ref">measure proximity to the target</span></a> to give the vehicle an
+opportunity to reach its destination. The <a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#example-guided-mode-setting-speed-yaw"><span class="std std-ref">Example: Guided Mode Movement and Commands (Copter)</span></a> shows both approaches.</p>
+<p>You can optionally set the target movement speed using the function’s <code class="docutils literal notranslate"><span class="pre">airspeed</span></code> or <code class="docutils literal notranslate"><span class="pre">groundspeed</span></code> parameters
+(this is equivalent to setting <a class="reference internal" href="../../automodule.html#dronekit.Vehicle.airspeed" title="dronekit.Vehicle.airspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.airspeed</span></code></a>
+or <a class="reference internal" href="../../automodule.html#dronekit.Vehicle.groundspeed" title="dronekit.Vehicle.groundspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.groundspeed</span></code></a>). The speed setting will then be used
+for all positional movement commands until it is set to another value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set airspeed using attribute</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">airspeed</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#m/s</span>
+
+<span class="c1"># Set groundspeed using attribute</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">groundspeed</span> <span class="o">=</span> <span class="mf">7.5</span> <span class="c1">#m/s</span>
+
+<span class="c1"># Set groundspeed using `simple_goto()` parameter</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">simple_goto</span><span class="p">(</span><span class="n">a_location</span><span class="p">,</span> <span class="n">groundspeed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">Vehicle.simple_goto()</span></code> will use the last speed value set. If both speed values are set at the
+same time the resulting behaviour will be vehicle dependent.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also set the position by sending the MAVLink commands
+<a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_GLOBAL_INT">SET_POSITION_TARGET_GLOBAL_INT</a> or
+<a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED">SET_POSITION_TARGET_LOCAL_NED</a>, specifying
+a <code class="docutils literal notranslate"><span class="pre">type_mask</span></code> bitmask that enables the position parameters. The main difference between these commands is
+that the former allows you to specify the location relative to the “global” frames (like
+<code class="docutils literal notranslate"><span class="pre">Vehicle.simple_goto()</span></code>), while the later lets you specify the location in NED co-ordinates relative
+to the home location or the vehicle itself. For more information on these options see the example code:
+<a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#example-guided-mode-goto-position-target-global-int"><span class="std std-ref">goto_position_target_global_int()</span></a> and <a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#example-guided-mode-goto-position-target-local-ned"><span class="std std-ref">goto_position_target_local_ned()</span></a>.</p>
+</div>
+</div>
+<div class="section" id="velocity-control">
+<span id="guided-mode-copter-velocity-control"></span><h3>Velocity control<a class="headerlink" href="#velocity-control" title="Permalink to this headline">¶</a></h3>
+<p>Controlling vehicle movement using velocity is much smoother than using position when there are likely
+to be many updates (for example when tracking moving objects).</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">send_ned_velocity()</span></code> below generates a <code class="docutils literal notranslate"><span class="pre">SET_POSITION_TARGET_LOCAL_NED</span></code> MAVLink message
+which is used to directly specify the speed components of the vehicle in the <code class="docutils literal notranslate"><span class="pre">MAV_FRAME_LOCAL_NED</span></code>
+frame (relative to home location). The message is re-sent every second for the specified duration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">From Copter 3.3 the vehicle will stop moving if a new message is not received in approximately 3 seconds.
+Prior to Copter 3.3 the message only needs to be sent once, and the velocity remains active until the next
+movement command is received. The example code works for both cases!</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">send_ned_velocity</span><span class="p">(</span><span class="n">velocity_x</span><span class="p">,</span> <span class="n">velocity_y</span><span class="p">,</span> <span class="n">velocity_z</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Move vehicle in direction based on specified velocity vectors.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">message_factory</span><span class="o">.</span><span class="n">set_position_target_local_ned_encode</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span>       <span class="c1"># time_boot_ms (not used)</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1"># target system, target component</span>
+        <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_FRAME_LOCAL_NED</span><span class="p">,</span> <span class="c1"># frame</span>
+        <span class="mb">0b0000111111000111</span><span class="p">,</span> <span class="c1"># type_mask (only speeds enabled)</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="c1"># x, y, z positions (not used)</span>
+        <span class="n">velocity_x</span><span class="p">,</span> <span class="n">velocity_y</span><span class="p">,</span> <span class="n">velocity_z</span><span class="p">,</span> <span class="c1"># x, y, z velocity in m/s</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="c1"># x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink)</span>
+
+
+    <span class="c1"># send command to vehicle on 1 Hz cycle</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">duration</span><span class="p">):</span>
+        <span class="n">vehicle</span><span class="o">.</span><span class="n">send_mavlink</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">type_mask</span></code> parameter is a bitmask that indicates which of the other parameters in the message are used/ignored by the vehicle
+(0 means that the dimension is enabled, 1 means ignored). In the example the value 0b0000111111000111
+is used to enable the velocity components.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">MAV_FRAME_LOCAL_NED</span></code> the speed components <code class="docutils literal notranslate"><span class="pre">velocity_x</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity_y</span></code> are parallel to the North and East
+directions (not to the front and side of the vehicle).
+The <code class="docutils literal notranslate"><span class="pre">velocity_z</span></code> component is perpendicular to the plane of <code class="docutils literal notranslate"><span class="pre">velocity_x</span></code> and <code class="docutils literal notranslate"><span class="pre">velocity_y</span></code>, with a positive value <strong>towards the ground</strong>, following
+the right-hand convention. For more information about the <code class="docutils literal notranslate"><span class="pre">MAV_FRAME_LOCAL_NED</span></code> frame of reference, see this wikipedia article
+on <a class="reference external" href="http://en.wikipedia.org/wiki/North_east_down">NED</a>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">From Copter 3.3 you can <a class="reference external" href="http://dev.ardupilot.com/wiki/copter-commands-in-guided-mode/#set_position_target_local_ned">specify other frames</a>,
+for example <code class="docutils literal notranslate"><span class="pre">MAV_FRAME_BODY_OFFSET_NED</span></code> makes the velocity components relative to the current vehicle heading.
+In Copter 3.2.1 (and earlier) the frame setting is ignored (<code class="docutils literal notranslate"><span class="pre">MAV_FRAME_LOCAL_NED</span></code> is always used).</p>
+</div>
+<p>The code fragment below shows how to call this method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up velocity mappings</span>
+<span class="c1"># velocity_x &gt; 0 =&gt; fly North</span>
+<span class="c1"># velocity_x &lt; 0 =&gt; fly South</span>
+<span class="c1"># velocity_y &gt; 0 =&gt; fly East</span>
+<span class="c1"># velocity_y &lt; 0 =&gt; fly West</span>
+<span class="c1"># velocity_z &lt; 0 =&gt; ascend</span>
+<span class="c1"># velocity_z &gt; 0 =&gt; descend</span>
+<span class="n">SOUTH</span><span class="o">=-</span><span class="mi">2</span>
+<span class="n">UP</span><span class="o">=-</span><span class="mf">0.5</span>   <span class="c1">#NOTE: up is negative!</span>
+
+<span class="c1">#Fly south and up.</span>
+<span class="n">send_ned_velocity</span><span class="p">(</span><span class="n">SOUTH</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">DURATION</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When moving the vehicle you can send separate commands to control the yaw (and other behaviour).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also control the velocity using the
+<a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_GLOBAL_INT">SET_POSITION_TARGET_GLOBAL_INT</a>
+MAVLink command, as described in <a class="reference internal" href="../../examples/guided-set-speed-yaw-demo.html#example-guided-mode-send-global-velocity"><span class="std std-ref">send_global_velocity()</span></a>.</p>
+</div>
+</div>
+<div class="section" id="acceleration-and-force-control">
+<span id="guided-mode-copter-accel-force-control"></span><h3>Acceleration and force control<a class="headerlink" href="#acceleration-and-force-control" title="Permalink to this headline">¶</a></h3>
+<p>ArduPilot does not currently support controlling the vehicle by specifying acceleration/force components.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_GLOBAL_INT">SET_POSITION_TARGET_GLOBAL_INT</a> and
+<a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED">SET_POSITION_TARGET_LOCAL_NED</a>
+MAVLink commands allow you to specify the acceleration, force and yaw. However, commands setting
+these parameters are ignored by the vehicle.</p>
+</div>
+</div>
+</div>
+<div class="section" id="guided-mode-commands">
+<span id="guided-mode-copter-commands"></span><h2>Guided mode commands<a class="headerlink" href="#guided-mode-commands" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how to send MAVLink commands, what commands can be sent, and lists a number of real examples you can use in your own code.</p>
+<div class="section" id="sending-messages-commands">
+<span id="guided-mode-how-to-send-commands"></span><h3>Sending messages/commands<a class="headerlink" href="#sending-messages-commands" title="Permalink to this headline">¶</a></h3>
+<p>MAVLink commands are sent by first using <a class="reference internal" href="../../automodule.html#dronekit.Vehicle.message_factory" title="dronekit.Vehicle.message_factory"><code class="xref py py-func docutils literal notranslate"><span class="pre">message_factory()</span></code></a>
+to encode the message and then calling <a class="reference internal" href="../../automodule.html#dronekit.Vehicle.send_mavlink" title="dronekit.Vehicle.send_mavlink"><code class="xref py py-func docutils literal notranslate"><span class="pre">send_mavlink()</span></code></a> to send them.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Vehicles support a subset of the messages defined in the MAVLink standard. For more information
+about the supported sets see wiki topics:
+<a class="reference external" href="http://dev.ardupilot.com/wiki/copter-commands-in-guided-mode/">Copter Commands in Guided Mode</a>
+and <a class="reference external" href="http://dev.ardupilot.com/wiki/plane-commands-in-guided-mode/">Plane Commands in Guided Mode</a>.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">message_factory()</span></code> uses a factory method for the encoding. The name of this method will always be the
+lower case version of the message/command name with <code class="docutils literal notranslate"><span class="pre">_encode</span></code> appended. For example, to encode a
+<a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED">SET_POSITION_TARGET_LOCAL_NED</a>
+message we call <code class="docutils literal notranslate"><span class="pre">message_factory.set_position_target_local_ned_encode()</span></code> with values for all the
+message fields as arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">message_factory</span><span class="o">.</span><span class="n">set_position_target_local_ned_encode</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span>       <span class="c1"># time_boot_ms (not used)</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1"># target_system, target_component</span>
+    <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_FRAME_BODY_NED</span><span class="p">,</span> <span class="c1"># frame</span>
+    <span class="mb">0b0000111111000111</span><span class="p">,</span> <span class="c1"># type_mask (only speeds enabled)</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="c1"># x, y, z positions</span>
+    <span class="n">velocity_x</span><span class="p">,</span> <span class="n">velocity_y</span><span class="p">,</span> <span class="n">velocity_z</span><span class="p">,</span> <span class="c1"># x, y, z velocity in m/s</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="c1"># x, y, z acceleration (not supported yet, ignored in GCS_Mavlink)</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink)</span>
+<span class="c1"># send command to vehicle</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">send_mavlink</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a message includes <code class="docutils literal notranslate"><span class="pre">target_system</span></code> id you can set it to zero (DroneKit will automatically
+update the value with the correct ID for the connected vehicle). Similarly CRC fields and sequence numbers
+(if defined in the message type) can be set to zero as they are automatically updated by DroneKit.
+The <code class="docutils literal notranslate"><span class="pre">target_component</span></code> is not updated by DroneKit, but should be set to 0 (broadcast) unless the message is
+really intended for a specific component.</p>
+<p id="guided-mode-how-to-send-commands-command-long">In Copter, the <a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#COMMAND_LONG">COMMAND_LONG message</a> can be used send/package
+<em>a number</em> of different <a class="reference external" href="http://dev.ardupilot.com/wiki/copter-commands-in-guided-mode/">supported MAV_CMD commands</a>.
+The factory function is again the lower case message name with suffix <code class="docutils literal notranslate"><span class="pre">_encode</span></code> (<code class="docutils literal notranslate"><span class="pre">message_factory.command_long_encode</span></code>).
+The message parameters include the actual command to be sent (in the code fragment below <code class="docutils literal notranslate"><span class="pre">MAV_CMD_CONDITION_YAW</span></code>) and its fields.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">message_factory</span><span class="o">.</span><span class="n">command_long_encode</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1"># target_system, target_component</span>
+    <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_CMD_CONDITION_YAW</span><span class="p">,</span> <span class="c1">#command</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="c1">#confirmation</span>
+    <span class="n">heading</span><span class="p">,</span>    <span class="c1"># param 1, yaw in degrees</span>
+    <span class="mi">0</span><span class="p">,</span>          <span class="c1"># param 2, yaw speed deg/s</span>
+    <span class="mi">1</span><span class="p">,</span>          <span class="c1"># param 3, direction -1 ccw, 1 cw</span>
+    <span class="n">is_relative</span><span class="p">,</span> <span class="c1"># param 4, relative offset 1, absolute angle 0</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># param 5 ~ 7 not used</span>
+<span class="c1"># send command to vehicle</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">send_mavlink</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="supported-commands">
+<span id="guided-mode-supported-commands"></span><h3>Supported commands<a class="headerlink" href="#supported-commands" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://dev.ardupilot.com/wiki/copter-commands-in-guided-mode/">Copter Commands in Guided Mode</a> lists all the commands that <em>can</em> be sent to Copter in GUIDED mode (in fact most of the commands can be sent in any mode!)</p>
+<p>DroneKit-Python provides a friendly Python API that abstracts many of the commands.
+Where possible you should use the API rather than send messages directly&gt; For example, use:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../automodule.html#dronekit.Vehicle.simple_takeoff" title="dronekit.Vehicle.simple_takeoff"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.simple_takeoff()</span></code></a> instead of the <code class="docutils literal notranslate"><span class="pre">MAV_CMD_NAV_TAKEOFF</span></code> command.</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="../../automodule.html#dronekit.Vehicle.simple_goto" title="dronekit.Vehicle.simple_goto"><code class="xref py py-func docutils literal notranslate"><span class="pre">Vehicle.simple_goto()</span></code></a>, <a class="reference internal" href="../../automodule.html#dronekit.Vehicle.airspeed" title="dronekit.Vehicle.airspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.airspeed</span></code></a>,</dt>
+<dd>or <a class="reference internal" href="../../automodule.html#dronekit.Vehicle.groundspeed" title="dronekit.Vehicle.groundspeed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Vehicle.groundspeed</span></code></a> rather than <code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_CHANGE_SPEED</span></code>.</dd>
+</dl>
+</li>
+</ul>
+<p>Some of the MAV_CMD commands that you might want to send include:
+<a class="reference internal" href="#guided-mode-copter-set-yaw"><span class="std std-ref">MAV_CMD_CONDITION_YAW</span></a>,
+<a class="reference internal" href="#guided-mode-copter-set-roi"><span class="std std-ref">MAV_CMD_DO_SET_ROI</span></a>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_SET_SERVO</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_REPEAT_SERVO</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_SET_RELAY</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_REPEAT_RELAY</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_FENCE_ENABLE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_PARACHUTE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_DO_GRIPPER</span></code>,
+<code class="docutils literal notranslate"><span class="pre">MAV_CMD_MISSION_START</span></code>.
+These would be sent in a <code class="docutils literal notranslate"><span class="pre">COMMAND_LONG</span></code> message <a class="reference internal" href="#guided-mode-how-to-send-commands-command-long"><span class="std std-ref">as discussed above</span></a>.</p>
+</div>
+<div class="section" id="setting-the-yaw">
+<span id="guided-mode-copter-set-yaw"></span><h3>Setting the Yaw<a class="headerlink" href="#setting-the-yaw" title="Permalink to this headline">¶</a></h3>
+<p>The vehicle “yaw” is the direction that the vehicle is facing in the horizontal plane. On Copter this yaw need not be the direction of travel (though it is by default).</p>
+<p>You can set the yaw direction using the <a class="reference external" href="http://copter.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_condition_yaw">MAV_CMD_CONDITION_YAW</a> command, encoded in a <code class="docutils literal notranslate"><span class="pre">COMMAND_LONG</span></code> message as shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">condition_yaw</span><span class="p">(</span><span class="n">heading</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">relative</span><span class="p">:</span>
+        <span class="n">is_relative</span><span class="o">=</span><span class="mi">1</span> <span class="c1">#yaw relative to direction of travel</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">is_relative</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#yaw is an absolute angle</span>
+    <span class="c1"># create the CONDITION_YAW command using command_long_encode()</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">message_factory</span><span class="o">.</span><span class="n">command_long_encode</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1"># target system, target component</span>
+        <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_CMD_CONDITION_YAW</span><span class="p">,</span> <span class="c1">#command</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="c1">#confirmation</span>
+        <span class="n">heading</span><span class="p">,</span>    <span class="c1"># param 1, yaw in degrees</span>
+        <span class="mi">0</span><span class="p">,</span>          <span class="c1"># param 2, yaw speed deg/s</span>
+        <span class="mi">1</span><span class="p">,</span>          <span class="c1"># param 3, direction -1 ccw, 1 cw</span>
+        <span class="n">is_relative</span><span class="p">,</span> <span class="c1"># param 4, relative offset 1, absolute angle 0</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># param 5 ~ 7 not used</span>
+    <span class="c1"># send command to vehicle</span>
+    <span class="n">vehicle</span><span class="o">.</span><span class="n">send_mavlink</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The command allows you to specify that whether the heading is an absolute angle in degrees (0 degrees is North) or a value that is relative to the previously set heading.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>The yaw will return to the default (facing direction of travel) after you set the mode or change the command used for controlling movement.</li>
+<li><a class="reference external" href="https://github.com/diydrones/ardupilot/issues/2427">At time of writing</a> there is no <em>safe way</em> to return to the default yaw “face direction of travel” behaviour.</li>
+<li>After taking off, yaw commands are ignored until the first “movement” command has been received.
+If you need to yaw immediately following takeoff then send a command to “move” to your current position.</li>
+<li><a class="reference internal" href="#guided-mode-copter-set-roi"><span class="std std-ref">Setting the ROI</span></a> may work to get yaw to track a particular point (depending on the gimbal setup).</li>
+</ul>
+</div>
+</div>
+<div class="section" id="setting-the-roi">
+<span id="guided-mode-copter-set-roi"></span><h3>Setting the ROI<a class="headerlink" href="#setting-the-roi" title="Permalink to this headline">¶</a></h3>
+<p>Send the <a class="reference external" href="http://copter.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_set_roi">MAV_CMD_DO_SET_ROI</a> command to point camera gimbal at a specified region of interest (<a class="reference internal" href="../../automodule.html#dronekit.LocationGlobal" title="dronekit.LocationGlobal"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationGlobal</span></code></a>). The vehicle may also turn to face the ROI.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_roi</span><span class="p">(</span><span class="n">location</span><span class="p">):</span>
+    <span class="c1"># create the MAV_CMD_DO_SET_ROI command</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">message_factory</span><span class="o">.</span><span class="n">command_long_encode</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1"># target system, target component</span>
+        <span class="n">mavutil</span><span class="o">.</span><span class="n">mavlink</span><span class="o">.</span><span class="n">MAV_CMD_DO_SET_ROI</span><span class="p">,</span> <span class="c1">#command</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="c1">#confirmation</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">#params 1-4</span>
+        <span class="n">location</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span>
+        <span class="n">location</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span>
+        <span class="n">location</span><span class="o">.</span><span class="n">alt</span>
+        <span class="p">)</span>
+    <span class="c1"># send command to vehicle</span>
+    <span class="n">vehicle</span><span class="o">.</span><span class="n">send_mavlink</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified">New in version Copter: </span>3.2.1. You can explicitly reset the ROI by sending the
+<a class="reference external" href="http://copter.ardupilot.com/common-mavlink-mission-command-messages-mav_cmd/#mav_cmd_do_set_roi">MAV_CMD_DO_SET_ROI</a>
+command with zero in all parameters. The front of the vehicle will then follow the direction of travel.</p>
+</div>
+<p>The ROI (and yaw) is also reset when the mode, or the command used to control movement, is changed.</p>
+</div>
+<div class="section" id="command-acknowledgements-and-response-values">
+<span id="guided-mode-copter-responses"></span><h3>Command acknowledgements and response values<a class="headerlink" href="#command-acknowledgements-and-response-values" title="Permalink to this headline">¶</a></h3>
+<p>ArduPilot typically sends a command acknowledgement indicating whether a command was received, and whether
+it was accepted or rejected. At time of writing there is no way to intercept this acknowledgement
+in the API (<a class="reference external" href="https://github.com/dronekit/dronekit-python/pull/168">#168</a>).</p>
+<p>Some MAVLink messages request information from the autopilot, and expect the result to be returned
+in another message. Provided the message is handled by the AutoPilot in GUIDED mode you can send the request
+and process the response by creating a <a class="reference internal" href="../mavlink_messages.html#mavlink-messages-message-listener"><span class="std std-ref">message listener</span></a>.</p>
+</div>
+</div>
+<div class="section" id="frame-conversion-functions">
+<span id="guided-mode-copter-useful-conversion-functions"></span><h2>Frame conversion functions<a class="headerlink" href="#frame-conversion-functions" title="Permalink to this headline">¶</a></h2>
+<p>The functions in this section help convert between different frames-of-reference. In particular they
+make it easier to navigate in terms of “metres from the current position” when using commands that take
+absolute positions in decimal degrees.</p>
+<p>The methods are approximations only, and may be less accurate over longer distances, and when close
+to the Earth’s poles.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_location_metres</span><span class="p">(</span><span class="n">original_location</span><span class="p">,</span> <span class="n">dNorth</span><span class="p">,</span> <span class="n">dEast</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a LocationGlobal object containing the latitude/longitude `dNorth` and `dEast` metres from the</span>
+<span class="sd">    specified `original_location`. The returned LocationGlobal has the same `alt` value</span>
+<span class="sd">    as `original_location`.</span>
+
+<span class="sd">    The function is useful when you want to move the vehicle around specifying locations relative to</span>
+<span class="sd">    the current vehicle position.</span>
+
+<span class="sd">    The algorithm is relatively accurate over small distances (10m within 1km) except close to the poles.</span>
+
+<span class="sd">    For more information see:</span>
+<span class="sd">    http://gis.stackexchange.com/questions/2951/algorithm-for-offsetting-a-latitude-longitude-by-some-amount-of-meters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">earth_radius</span><span class="o">=</span><span class="mf">6378137.0</span> <span class="c1">#Radius of &quot;spherical&quot; earth</span>
+    <span class="c1">#Coordinate offsets in radians</span>
+    <span class="n">dLat</span> <span class="o">=</span> <span class="n">dNorth</span><span class="o">/</span><span class="n">earth_radius</span>
+    <span class="n">dLon</span> <span class="o">=</span> <span class="n">dEast</span><span class="o">/</span><span class="p">(</span><span class="n">earth_radius</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">original_location</span><span class="o">.</span><span class="n">lat</span><span class="o">/</span><span class="mi">180</span><span class="p">))</span>
+
+    <span class="c1">#New position in decimal degrees</span>
+    <span class="n">newlat</span> <span class="o">=</span> <span class="n">original_location</span><span class="o">.</span><span class="n">lat</span> <span class="o">+</span> <span class="p">(</span><span class="n">dLat</span> <span class="o">*</span> <span class="mi">180</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">newlon</span> <span class="o">=</span> <span class="n">original_location</span><span class="o">.</span><span class="n">lon</span> <span class="o">+</span> <span class="p">(</span><span class="n">dLon</span> <span class="o">*</span> <span class="mi">180</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">original_location</span><span class="p">)</span> <span class="ow">is</span> <span class="n">LocationGlobal</span><span class="p">:</span>
+        <span class="n">targetlocation</span><span class="o">=</span><span class="n">LocationGlobal</span><span class="p">(</span><span class="n">newlat</span><span class="p">,</span> <span class="n">newlon</span><span class="p">,</span><span class="n">original_location</span><span class="o">.</span><span class="n">alt</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">original_location</span><span class="p">)</span> <span class="ow">is</span> <span class="n">LocationGlobalRelative</span><span class="p">:</span>
+        <span class="n">targetlocation</span><span class="o">=</span><span class="n">LocationGlobalRelative</span><span class="p">(</span><span class="n">newlat</span><span class="p">,</span> <span class="n">newlon</span><span class="p">,</span><span class="n">original_location</span><span class="o">.</span><span class="n">alt</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Invalid Location object passed&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">targetlocation</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_distance_metres</span><span class="p">(</span><span class="n">aLocation1</span><span class="p">,</span> <span class="n">aLocation2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the ground distance in metres between two `LocationGlobal` or `LocationGlobalRelative` objects.</span>
+
+<span class="sd">    This method is an approximation, and will not be accurate over large distances and close to the</span>
+<span class="sd">    earth&#39;s poles. It comes from the ArduPilot test code:</span>
+<span class="sd">    https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/common.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dlat</span> <span class="o">=</span> <span class="n">aLocation2</span><span class="o">.</span><span class="n">lat</span> <span class="o">-</span> <span class="n">aLocation1</span><span class="o">.</span><span class="n">lat</span>
+    <span class="n">dlong</span> <span class="o">=</span> <span class="n">aLocation2</span><span class="o">.</span><span class="n">lon</span> <span class="o">-</span> <span class="n">aLocation1</span><span class="o">.</span><span class="n">lon</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">dlat</span><span class="o">*</span><span class="n">dlat</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">dlong</span><span class="o">*</span><span class="n">dlong</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1.113195e5</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_bearing</span><span class="p">(</span><span class="n">aLocation1</span><span class="p">,</span> <span class="n">aLocation2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the bearing between the two LocationGlobal objects passed as parameters.</span>
+
+<span class="sd">    This method is an approximation, and may not be accurate over large distances and close to the</span>
+<span class="sd">    earth&#39;s poles. It comes from the ArduPilot test code:</span>
+<span class="sd">    https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/common.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">off_x</span> <span class="o">=</span> <span class="n">aLocation2</span><span class="o">.</span><span class="n">lon</span> <span class="o">-</span> <span class="n">aLocation1</span><span class="o">.</span><span class="n">lon</span>
+    <span class="n">off_y</span> <span class="o">=</span> <span class="n">aLocation2</span><span class="o">.</span><span class="n">lat</span> <span class="o">-</span> <span class="n">aLocation1</span><span class="o">.</span><span class="n">lat</span>
+    <span class="n">bearing</span> <span class="o">=</span> <span class="mf">90.00</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">off_y</span><span class="p">,</span> <span class="n">off_x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">57.2957795</span>
+    <span class="k">if</span> <span class="n">bearing</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bearing</span> <span class="o">+=</span> <span class="mf">360.00</span>
+    <span class="k">return</span> <span class="n">bearing</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">The <a class="reference external" href="https://github.com/diydrones/ardupilot/blob/master/Tools/autotest/common.py">common.py</a> file
+in the ArduPilot test code may have other functions that you will find useful.</p>
+</div>
+</div>
+<div class="section" id="other-information">
+<h2>Other information<a class="headerlink" href="#other-information" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/North_east_down">NED Frame</a></li>
+<li><a class="reference external" href="https://pixhawk.ethz.ch/mavlink/#MISSION_ITEM">MISSION_ITEM</a></li>
+<li><a class="reference external" href="http://copter.ardupilot.com/wiki/flying-arducopter/flight-modes/ac2_guidedmode/">GUIDED Mode for Copter</a> (wiki).</li>
+<li><a class="reference external" href="http://plane.ardupilot.com/wiki/flying/flight-modes/#guided">GUIDED mode for Plane</a> (wiki).</li>
+<li><a class="reference external" href="http://dev.ardupilot.com/wiki/copter-commands-in-guided-mode/">Copter Commands in Guided Mode</a> (wiki).</li>
+<li><a class="reference external" href="http://planner.ardupilot.com/wiki/common-mavlink-mission-command-messages-mav_cmd">MAVLink mission command messages</a> (wiki).</li>
+<li><a class="reference external" href="https://github.com/diydrones/ardupilot/blob/master/ArduCopter/GCS_Mavlink.cpp">GCS_Mavlink.cpp</a> (Copter)</li>
+</ul>
+</div>
+</div>
+
+
+					<footer id="footer">
+						
+	<div class="footer-buttons" role="navigation" aria-label="footer navigation">
+		
+			<a href="../auto_mode.html" class="btn btn-default pull-right" title="Missions (AUTO Mode)">
+				Next <span class="fa fa-arrow-circle-right"></span>
+			</a>
+		
+		
+			<a href="../taking_off.html" class="btn btn-default" title="Taking Off">
+				<span class="fa fa-arrow-circle-left"></span> Previous
+			</a>
+		
+	</div>
+
+
+<hr/>
+
+<div role="contentinfo">
+	<p>
+				&copy; Copyright 2015-2016, 3D Robotics.
+	</p>
+</div>
+Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/3drobotics/sphinx_3dr_theme">theme</a> provided by <a href="https://3drobotics.com/">3D Robotics</a> for <a href="http://dronekit.io/">DroneKit</a>.
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+		<script type="text/javascript" src="../../_static/js/jquery.js"></script>
+		<script type="text/javascript" src="../../_static/js/scroll.js"></script>
+		<script type="text/javascript" src="../../_static/underscore.js"></script>
+		<script type="text/javascript" src="../../_static/doctools.js"></script>
+		<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../_static/js/cool-select.js"></script>
+		<script type="text/javascript" src="../../_static/searchtools.js"></script>
+	
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','../../../../../www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-39974306-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/guide/copter/guided_mode.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:38 GMT -->
+</html>

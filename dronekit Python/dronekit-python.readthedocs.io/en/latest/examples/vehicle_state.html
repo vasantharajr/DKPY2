@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/examples/vehicle_state.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:39 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	
+		<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/badge_only.css" type="text/css" />
+	
+		<link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+	
+
+	<link rel="stylesheet" href="../_static/css/style.css" />
+	<script src="../_static/js/modernizr.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
+
+	
+		<title>Example: Vehicle State</title>
+	
+
+	<script type="text/javascript">
+		var DOCUMENTATION_OPTIONS = {
+			URL_ROOT: '',
+			VERSION: '2.4.0',
+			COLLAPSE_INDEX: false,
+			FILE_SUFFIX: '.html',
+			HAS_SOURCE: true
+		};
+	</script>
+
+
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="vehicle_state.html" />
+
+<link rel="stylesheet" href="../../../../assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="../_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "examples/vehicle_state"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="../../../../assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head>
+<body>
+	<nav id="topnav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed icon-facebook-sign" type="button" data-toggle="collapse" data-target="#collapsable-topnav">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="http://dronekit.io/">
+					<img src="../_static/images/new-DK-logo-color.svg" alt="3DR">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="collapsable-topnav">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://cloud.dronekit.io/" class="cloud">Cloud</a>
+					</li>
+					<li>
+						<a href="http://python.dronekit.io/" class="air">Python</a>
+					</li>
+					<li>
+						<a href="http://android.dronekit.io/" class="ground">Android</a>
+					</li>
+					<li>
+						<a href="http://dronekit.io/support" class="support">Support</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row gray-bg">
+			<div class="col-sm-3 col-md-2 col-sidebar">
+
+        
+					
+	<div id="sidebar-search" role="search">
+		<form id="rtd-search-form" class="form-inline" action="https://dronekit-python.readthedocs.io/en/latest/search.html" method="get">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input class="form-control" type="text" name="q" placeholder="Search..." />
+			</div>
+			<input type="hidden" name="check_keywords" value="yes" />
+			<input type="hidden" name="area" value="default" />
+		</form>
+	</div>
+        
+				<div id="gray-sidebar" class="container-fluid">
+	        
+	          
+	          
+	              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about/overview.html">About DroneKit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#open-source-community">Open source community</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#compatibility">Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#api-features">API features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/overview.html#technical-support">Technical support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/release_notes.html">Release Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#latest-release">Latest release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#changelog">Changelog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-1-2017-04-21">Version 2.9.1 (2017-04-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-9-0-2016-08-29">Version 2.9.0 (2016-08-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-8-0-2016-07-15">Version 2.8.0 (2016-07-15)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-7-0-2016-06-21">Version 2.7.0 (2016-06-21)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-6-0-2016-06-17">Version 2.6.0 (2016-06-17)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-5-0-2016-05-04">Version 2.5.0 (2016-05-04)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-4-0-2016-02-29">Version 2.4.0 (2016-02-29)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-3-0-2016-02-26">Version 2.3.0 (2016-02-26)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-2-0-2016-02-19">Version 2.2.0 (2016-02-19)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-1-0-2016-02-16">Version 2.1.0 (2016-02-16)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-2-2015-11-30">Version 2.0.2 (2015-11-30)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/release_notes.html#version-2-0-0-2015-11-23">Version 2.0.0 (2015-11-23)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#all-releases">All releases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/release_notes.html#working-with-releases">Working with releases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/migrating.html">Migrating to DKPY 2.0</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#code-changes">Code changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connecting-to-a-vehicle">Connecting to a vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#connection-status-checks">Connection status checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#script-completion-checks">Script completion checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#command-line-arguments">Command line arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#current-script-directory">Current script directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#vehicle-location">Vehicle.location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#takeoff-and-movement-commands">Takeoff and movement commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#home-location">Home location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#missions-and-waypoints">Missions and Waypoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#parameter-changes">Parameter changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#intercepting-mavlink-messages">Intercepting MAVLink Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#new-attributes">New attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../about/migrating.html#channel-overrides">Channel Overrides</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../about/migrating.html#debugging">Debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../about/license.html">Open Source Licence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#basic-hello-drone">Basic “Hello Drone”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/quick_start.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/index.html">Developing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../develop/installation.html">Installing DroneKit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/companion-computers.html">Companion Computers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#raspberrypi">RaspberryPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#intel-edison">Intel Edison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#beagleboneblack">BeagleBoneBlack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/companion-computers.html#odroid">Odroid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/sitl_setup.html">Simulated Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl">DroneKit-SITL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#running-sitl">Running SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#connecting-to-dronekit-sitl">Connecting to DroneKit-SITL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../develop/sitl_setup.html#dronekit-sitl-python-api">DroneKit-SITL Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#building-sitl-from-source">Building SITL from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/sitl_setup.html#connecting-an-additional-ground-station">Connecting an additional Ground Station</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/best_practice.html">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#general-considerations">General considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#connecting">Connecting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launch-sequence">Launch sequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#movement-commands">Movement commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#vehicle-information">Vehicle information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#missions-and-waypoints">Missions and waypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#monitor-and-react-to-state-changes">Monitor and react to state changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#sleep-the-script-when-not-needed">Sleep the script when not needed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#exiting-a-script">Exiting a script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#subclass-vehicle">Subclass Vehicle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#launching-scripts">Launching scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../develop/best_practice.html#current-script-directory">Current script directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../develop/coding_standards.html">Coding Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/index.html">Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guide/connecting_vehicle.html">Connecting to a Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/connecting_vehicle.html#get-started-connect-string">Connection string options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/connecting_vehicle.html#connecting-to-multiple-vehicles">Connecting to multiple vehicles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html">Vehicle State and Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#attributes">Attributes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#getting-attributes">Getting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#setting-attributes">Setting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#observing-attribute-changes">Observing attribute changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#home-location">Home location</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#getting-parameters">Getting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#setting-parameters">Setting parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#listing-all-parameters">Listing all parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#observing-parameter-changes">Observing parameter changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/vehicle_state_and_parameters.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/taking_off.html">Taking Off</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/copter/guided_mode.html">Guiding and Controlling Copter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#controlling-vehicle-movement">Controlling vehicle movement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#position-control">Position control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#velocity-control">Velocity control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#acceleration-and-force-control">Acceleration and force control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#guided-mode-commands">Guided mode commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#sending-messages-commands">Sending messages/commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#supported-commands">Supported commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#setting-the-yaw">Setting the Yaw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#setting-the-roi">Setting the ROI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/copter/guided_mode.html#command-acknowledgements-and-response-values">Command acknowledgements and response values</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#frame-conversion-functions">Frame conversion functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/copter/guided_mode.html#other-information">Other information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/auto_mode.html">Missions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#mission-command-overview">Mission Command Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#download-current-mission">Download current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#clearing-current-mission">Clearing current mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#creating-adding-mission-commands">Creating/adding mission commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#modifying-missions">Modifying missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#running-and-monitoring-missions">Running and monitoring missions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#handling-the-end-of-a-mission">Handling the end of a mission</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#useful-mission-functions">Useful Mission functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#load-a-mission-from-a-file">Load a mission from a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#save-a-mission-to-a-file">Save a mission to a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../guide/auto_mode.html#get-distance-to-waypoint">Get distance to waypoint</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/auto_mode.html#useful-links">Useful Links</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/debugging.html">Debugging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#pdb-the-python-debugger">pdb - The Python Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#pudb-a-full-screen-console-based-python-debugger">pudb - A full-screen, console-based Python debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#print-log-statements">Print/log statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/debugging.html#other-ides-debuggers">Other IDEs/debuggers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guide/mavlink_messages.html">MAVLink Messages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#creating-a-message-listener">Creating a message listener</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#watching-all-messages">Watching all messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guide/mavlink_messages.html#removing-an-observer">Removing an observer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="running_examples.html">Running the Examples</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Vehicle State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simple_goto.html">Simple Goto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="simple_goto.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simple_goto.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="simple_goto.html#takeoff">Takeoff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="simple_goto.html#flying-to-a-point-simple-goto">Flying to a point - simple_goto</a></li>
+<li class="toctree-l4"><a class="reference internal" href="simple_goto.html#rtl-return-to-launch">RTL - Return to launch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="simple_goto.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="guided-set-speed-yaw-demo.html">Guided Movement and Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#goto-convenience-function">goto() - convenience function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#send-ned-velocity">send_ned_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#send-global-velocity">send_global_velocity()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#goto-position-target-global-int">goto_position_target_global_int()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="guided-set-speed-yaw-demo.html#goto-position-target-local-ned">goto_position_target_local_ned()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#testbed-settings">Testbed settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guided-set-speed-yaw-demo.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mission_basic.html">Basic Mission</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_basic.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mission_import_export.html">Mission Import/Export</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mission_import_export.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="create_attribute.html">Create Attribute in App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="create_attribute.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_attribute.html#how-does-it-work">How does it work?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="create_attribute.html#subclassing-vehicle">Subclassing Vehicle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="create_attribute.html#using-the-vehicle-subclass">Using the Vehicle subclass</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="create_attribute.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_attribute.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="follow_me.html">Follow Me (Linux only)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="follow_me.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="follow_me.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="follow_me.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="drone_delivery.html">Drone Delivery</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#screenshots">Screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="drone_delivery.html#using-attribute-observers">Using attribute observers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="drone_delivery.html#starting-cherrypy-from-a-dronekit-application">Starting CherryPy from a DroneKit application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="drone_delivery.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="flight_replay.html">Flight Replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="flight_replay.html#getting-the-points">Getting the points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="flight_replay.html#setting-the-new-waypoints">Setting the new waypoints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#known-issues">Known issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flight_replay.html#source-code">Source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="channel_overrides.html">Channel Overrides</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="channel_overrides.html#running-the-example">Running the example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channel_overrides.html#how-does-it-work">How does it work?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channel_overrides.html#source-code">Source code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/getting_started.html">How you can Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_api.html">Contributing to the API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_api.html#test-code">Test code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#setting-up-local-testing">Setting up local testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#unit-tests">Unit tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../contributing/contributions_api.html#integration-tests">Integration tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/contributions_documentation.html">Contributing to the Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#documentation-system-overview">Documentation system overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#submitting-changes">Submitting changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#building-the-docs">Building the docs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/contributions_documentation.html#style-guide">Style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_windows.html">Building DroneKit-Python on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#install-dronekit-using-winpython-command-line">Install DroneKit using WinPython command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_windows.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/developer_setup_linux.html">Building DroneKit-Python on Linux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#fetch-and-build-dronekit-source">Fetch and build DroneKit source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/developer_setup_linux.html#updating-dronekit">Updating DroneKit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../automodule.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference external" href="http://python.dronekit.io/genindex.html">Index</a></li>
+</ul>
+</li>
+</ul>
+
+	          
+	        
+				</div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div id="api-content">
+					
+  <div class="section" id="example-vehicle-state">
+<span id="id1"></span><h1>Example: Vehicle State<a class="headerlink" href="#example-vehicle-state" title="Permalink to this headline">¶</a></h1>
+<p>This example shows how to get/set vehicle attribute and parameter information,
+how to observe vehicle attribute changes, and how to get the home position.</p>
+<p>The guide topic <a class="reference internal" href="../guide/vehicle_state_and_parameters.html#vehicle-information"><span class="std std-ref">Vehicle State and Settings</span></a> provides a more detailed explanation
+of how the API should be used.</p>
+<div class="section" id="running-the-example">
+<h2>Running the example<a class="headerlink" href="#running-the-example" title="Permalink to this headline">¶</a></h2>
+<p>The example can be run as described in <a class="reference internal" href="running_examples.html"><span class="doc">Running the Examples</span></a> (which in turn assumes that
+the vehicle and DroneKit have been set up as described in <a class="reference internal" href="../develop/installation.html#installing-dronekit"><span class="std std-ref">Installing DroneKit</span></a>).</p>
+<p>In summary, after cloning the repository:</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the example folder as shown:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> dronekit-python/examples/vehicle_state/
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can run the example against a simulator (DroneKit-SITL) by specifying the Python script without any arguments.
+The example will download SITL binaries (if needed), start the simulator, and then connect to it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python vehicle_state.py
+</pre></div>
+</div>
+<p>On the command prompt you should see (something like):</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>Connecting to vehicle on: tcp:127.0.0.1:5760
+&gt;&gt;&gt; APM:Copter V3.3 (d6053245)
+&gt;&gt;&gt; Frame: QUAD
+&gt;&gt;&gt; Calibrating barometer
+&gt;&gt;&gt; Initialising APM...
+&gt;&gt;&gt; barometer calibration complete
+&gt;&gt;&gt; GROUND START
+
+Get all vehicle attribute values:
+ Autopilot Firmware version: APM:Copter-3.3.0-alpha64
+   Major version number: 3
+   Minor version number: 3
+   Patch version number: 0
+   Release type: rc
+   Release version: 0
+   Stable release?: True
+ Autopilot capabilities
+   Supports MISSION_FLOAT message type: True
+   Supports PARAM_FLOAT message type: True
+   Supports MISSION_INT message type: False
+   Supports COMMAND_INT message type: False
+   Supports PARAM_UNION message type: False
+   Supports ftp for file transfers: False
+   Supports commanding attitude offboard: False
+   Supports commanding position and velocity targets in local NED frame: True
+   Supports set position + velocity targets in global scaled integers: True
+   Supports terrain protocol / data handling: True
+   Supports direct actuator control: False
+   Supports the flight termination command: True
+   Supports mission_float message type: True
+   Supports onboard compass calibration: False
+ Global Location: LocationGlobal:lat=-35.363261,lon=149.1652299,alt=None
+ Global Location (relative altitude): LocationGlobalRelative:lat=-35.363261,lon=149.1652299,alt=0.0
+ Local Location: LocationLocal:north=None,east=None,down=None
+ Attitude: Attitude:pitch=0.00294387154281,yaw=-0.11805768311,roll=0.00139428151306
+ Velocity: [-0.03, 0.02, 0.0]
+ GPS: GPSInfo:fix=3,num_sat=10
+ Gimbal status: Gimbal: pitch=None, roll=None, yaw=None
+ Battery: Battery:voltage=12.587,current=0.0,level=100
+ EKF OK?: False
+ Last Heartbeat: 0.769999980927
+ Rangefinder: Rangefinder: distance=None, voltage=None
+ Rangefinder distance: None
+ Rangefinder voltage: None
+ Heading: 353
+ Is Armable?: False
+ System status: STANDBY
+ Groundspeed: 0.0
+ Airspeed: 0.0
+ Mode: STABILIZE
+ Armed: False
+ Waiting for home location ...
+ ...
+ Waiting for home location ...
+ Waiting for home location ...
+
+ Home location: LocationGlobal:lat=-35.3632621765,lon=149.165237427,alt=583.989990234
+
+Set new home location
+ New Home Location (from attribute - altitude should be 222): LocationGlobal:lat=-35.363261,lon=149.1652299,alt=222
+ New Home Location (from vehicle - altitude should be 222): LocationGlobal:lat=-35.3632621765,lon=149.165237427,alt=222.0
+
+Set Vehicle.mode=GUIDED (currently: STABILIZE)
+ Waiting for mode change ...
+
+Set Vehicle.armed=True (currently: False)
+ Waiting for arming...
+ Waiting for arming...
+ Waiting for arming...
+&gt;&gt;&gt; ARMING MOTORS
+&gt;&gt;&gt; GROUND START
+ Waiting for arming...
+ Waiting for arming...
+&gt;&gt;&gt; Initialising APM...
+ Vehicle is armed: True
+
+Add `attitude` attribute callback/observer on `vehicle`
+ Wait 2s so callback invoked before observer removed
+ CALLBACK: Attitude changed to Attitude:pitch=-0.000483880605316,yaw=-0.0960851684213,roll=-0.00799709651619
+ CALLBACK: Attitude changed to Attitude:pitch=0.000153727291035,yaw=-0.0962921902537,roll=-0.00707155792043
+ ...
+ CALLBACK: Attitude changed to Attitude:pitch=0.00485319690779,yaw=-0.100129388273,roll=0.00181497994345
+  Remove Vehicle.attitude observer
+
+Add `mode` attribute callback/observer using decorator
+ Set mode=STABILIZE (currently: GUIDED) and wait for callback
+ Wait 2s so callback invoked before moving to next example
+ CALLBACK: Mode changed to VehicleMode:STABILIZE
+
+ Attempt to remove observer added with `on_attribute` decorator (should fail)
+ Exception: Cannot remove observer added using decorator
+
+Add attribute callback detecting ANY attribute change
+ Wait 1s so callback invoked before observer removed
+ CALLBACK: (attitude): Attitude:pitch=0.00716688157991,yaw=-0.0950401723385,roll=0.00759896961972
+ CALLBACK: (heading): 354
+ CALLBACK: (location): &lt;dronekit.Locations object at 0x000000000767F2B0&gt;
+ CALLBACK: (airspeed): 0.0
+ CALLBACK: (groundspeed): 0.0
+ CALLBACK: (ekf_ok): True
+ CALLBACK: (battery): Battery:voltage=12.538,current=3.48,level=99
+ CALLBACK: (gps_0): GPSInfo:fix=3,num_sat=10
+ CALLBACK: (location): &lt;dronekit.Locations object at 0x000000000767F2B0&gt;
+ CALLBACK: (velocity): [-0.14, 0.1, 0.0]
+ CALLBACK: (local_position): LocationLocal:north=-0.136136248708,east=-0.0430941730738,down=-0.00938374921679
+ CALLBACK: (channels): {&#39;1&#39;: 1500, &#39;3&#39;: 1000, &#39;2&#39;: 1500, &#39;5&#39;: 1800, &#39;4&#39;: 1500, &#39;7&#39;: 1000, &#39;6&#39;: 1000, &#39;8&#39;: 1800}
+ ...
+ CALLBACK: (ekf_ok): True
+ Remove Vehicle attribute observer
+
+Read and write parameters
+ Read vehicle param &#39;THR_MIN&#39;: 130.0
+ Write vehicle param &#39;THR_MIN&#39; : 10
+ Read new value of param &#39;THR_MIN&#39;: 10.0
+
+Print all parameters (iterate `vehicle.parameters`):
+ Key:RC7_REV Value:1.0
+ Key:GPS_INJECT_TO Value:127.0
+ Key:FLTMODE1 Value:7.0
+ ...
+ Key:SR2_POSITION Value:0.0
+ Key:SIM_FLOW_DELAY Value:0.0
+ Key:BATT_CURR_PIN Value:12.0
+
+Create parameter observer using decorator
+Write vehicle param &#39;THR_MIN&#39; : 20 (and wait for callback)
+ PARAMETER CALLBACK: THR_MIN changed to: 20.0
+
+Create (removable) observer for any parameter using wildcard string
+ Change THR_MID and THR_MIN parameters (and wait for callback)
+ ANY PARAMETER CALLBACK: THR_MID changed to: 400.0
+ PARAMETER CALLBACK: THR_MIN changed to: 30.0
+ ANY PARAMETER CALLBACK: THR_MIN changed to: 30.0
+
+Reset vehicle attributes/parameters and exit
+&gt;&gt;&gt; DISARMING MOTORS
+ PARAMETER CALLBACK: THR_MIN changed to: 130.0
+ ANY PARAMETER CALLBACK: THR_MIN changed to: 130.0
+ ANY PARAMETER CALLBACK: THR_MID changed to: 500.0
+
+Close vehicle object
+Completed
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can run the example against a specific connection (simulated or otherwise) by passing the <a class="reference internal" href="../guide/connecting_vehicle.html#get-started-connect-string"><span class="std std-ref">connection string</span></a> for your vehicle in the <code class="docutils literal notranslate"><span class="pre">--connect</span></code> parameter.</p>
+<p>For example, to connect to SITL running on UDP port 14550 on your local computer:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python vehicle_state.py --connect <span class="m">127</span>.0.0.1:14550
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">DroneKit-SITL does not automatically add a virtual gimbal and rangefinder,
+so these attributes will always report <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</div>
+</div>
+<div class="section" id="how-does-it-work">
+<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h2>
+<p>The guide topic <a class="reference internal" href="../guide/vehicle_state_and_parameters.html#vehicle-information"><span class="std std-ref">Vehicle State and Settings</span></a> provides an explanation of how this code works.</p>
+</div>
+<div class="section" id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<p>This example has no known issues.</p>
+</div>
+<div class="section" id="source-code">
+<h2>Source code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<p>The full source code at documentation build-time is listed below
+(<a class="reference external" href="https://github.com/dronekit/dronekit-python/blob/master/examples/vehicle_state/vehicle_state.py">current version on github</a>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">© Copyright 2015-2016, 3D Robotics.</span>
+<span class="sd">vehicle_state.py: </span>
+
+<span class="sd">Demonstrates how to get and set vehicle state and parameter information, </span>
+<span class="sd">and how to observe vehicle attribute (state) changes.</span>
+
+<span class="sd">Full documentation is provided at http://python.dronekit.io/examples/vehicle_state.html</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">dronekit</span> <span class="kn">import</span> <span class="n">connect</span><span class="p">,</span> <span class="n">VehicleMode</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1">#Set up option parsing to get connection string</span>
+<span class="kn">import</span> <span class="nn">argparse</span>  
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Print out vehicle state information. Connects to SITL on local PC by default.&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--connect&#39;</span><span class="p">,</span> 
+                   <span class="n">help</span><span class="o">=</span><span class="s2">&quot;vehicle connection target string. If not specified, SITL automatically started and used.&quot;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="n">connection_string</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">connect</span>
+<span class="n">sitl</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+<span class="c1">#Start SITL if no connection string specified</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">connection_string</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">dronekit_sitl</span>
+    <span class="n">sitl</span> <span class="o">=</span> <span class="n">dronekit_sitl</span><span class="o">.</span><span class="n">start_default</span><span class="p">()</span>
+    <span class="n">connection_string</span> <span class="o">=</span> <span class="n">sitl</span><span class="o">.</span><span class="n">connection_string</span><span class="p">()</span>
+
+
+<span class="c1"># Connect to the Vehicle. </span>
+<span class="c1">#   Set `wait_ready=True` to ensure default attributes are populated before `connect()` returns.</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Connecting to vehicle on: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">connection_string</span><span class="p">)</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">connection_string</span><span class="p">,</span> <span class="n">wait_ready</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">vehicle</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">(</span><span class="s1">&#39;autopilot_version&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get all vehicle attributes (state)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Get all vehicle attribute values:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Autopilot Firmware version: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Major version number: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">major</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Minor version number: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Patch version number: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">patch</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Release type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">release_type</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Release version: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">release_version</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Stable release?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">is_stable</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Autopilot capabilities&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports MISSION_FLOAT message type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">mission_float</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports PARAM_FLOAT message type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">param_float</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports MISSION_INT message type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">mission_int</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports COMMAND_INT message type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">command_int</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports PARAM_UNION message type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">param_union</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports ftp for file transfers: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">ftp</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports commanding attitude offboard: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">set_attitude_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports commanding position and velocity targets in local NED frame: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">set_attitude_target_local_ned</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports set position + velocity targets in global scaled integers: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">set_altitude_target_global_int</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports terrain protocol / data handling: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">terrain</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports direct actuator control: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">set_actuator_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports the flight termination command: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">flight_termination</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports mission_float message type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">mission_float</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;   Supports onboard compass calibration: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">capabilities</span><span class="o">.</span><span class="n">compass_calibration</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Global Location: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">global_frame</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Global Location (relative altitude): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">global_relative_frame</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Local Location: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">local_frame</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Attitude: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">attitude</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Velocity: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">velocity</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; GPS: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">gps_0</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Gimbal status: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">gimbal</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Battery: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">battery</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; EKF OK?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">ekf_ok</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Last Heartbeat: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">last_heartbeat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Rangefinder: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">rangefinder</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Rangefinder distance: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">rangefinder</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Rangefinder voltage: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">rangefinder</span><span class="o">.</span><span class="n">voltage</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Heading: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">heading</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Is Armable?: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">is_armable</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; System status: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">system_status</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Groundspeed: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">groundspeed</span><span class="p">)</span>    <span class="c1"># settable</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Airspeed: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">airspeed</span><span class="p">)</span>    <span class="c1"># settable</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Mode: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>    <span class="c1"># settable</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Armed: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">armed</span><span class="p">)</span>    <span class="c1"># settable</span>
+
+
+
+<span class="c1"># Get Vehicle Home location - will be `None` until first set by autopilot</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">:</span>
+    <span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+    <span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; Waiting for home location ...&quot;</span><span class="p">)</span>
+<span class="c1"># We have a home location, so print it!        </span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Home location: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">)</span>
+
+
+<span class="c1"># Set vehicle home_location, mode, and armed attributes (the only settable attributes)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Set new home location&quot;</span><span class="p">)</span>
+<span class="c1"># Home location must be within 50km of EKF home location (or setting will fail silently)</span>
+<span class="c1"># In this case, just set value to current location with an easily recognisable altitude (222)</span>
+<span class="n">my_location_alt</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">global_frame</span>
+<span class="n">my_location_alt</span><span class="o">.</span><span class="n">alt</span> <span class="o">=</span> <span class="mf">222.0</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span> <span class="o">=</span> <span class="n">my_location_alt</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; New Home Location (from attribute - altitude should be 222): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">)</span>
+
+<span class="c1">#Confirm current value on vehicle by re-downloading commands</span>
+<span class="n">cmds</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">commands</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="n">cmds</span><span class="o">.</span><span class="n">wait_ready</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; New Home Location (from vehicle - altitude should be 222): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">home_location</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Set Vehicle.mode = GUIDED (currently: </span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> 
+<span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">VehicleMode</span><span class="p">(</span><span class="s2">&quot;GUIDED&quot;</span><span class="p">)</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">name</span><span class="o">==</span><span class="s1">&#39;GUIDED&#39;</span><span class="p">:</span>  <span class="c1">#Wait until mode has changed</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; Waiting for mode change ...&quot;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># Check that vehicle is armable</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">is_armable</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; Waiting for vehicle to initialise...&quot;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># If required, you can provide additional information about initialisation</span>
+    <span class="c1"># using `vehicle.gps_0.fix_type` and `vehicle.mode.name`.</span>
+    
+<span class="c1">#print &quot;\nSet Vehicle.armed=True (currently: %s)&quot; % vehicle.armed </span>
+<span class="c1">#vehicle.armed = True</span>
+<span class="c1">#while not vehicle.armed:</span>
+<span class="c1">#    print &quot; Waiting for arming...&quot;</span>
+<span class="c1">#    time.sleep(1)</span>
+<span class="c1">#print &quot; Vehicle is armed: %s&quot; % vehicle.armed </span>
+
+
+<span class="c1"># Add and remove and attribute callbacks</span>
+
+<span class="c1">#Define callback for `vehicle.attitude` observer</span>
+<span class="n">last_attitude_cache</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">def</span> <span class="nf">attitude_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="c1"># `attr_name` - the observed attribute (used if callback is used for multiple attributes)</span>
+    <span class="c1"># `self` - the associated vehicle object (used if a callback is different for multiple vehicles)</span>
+    <span class="c1"># `value` is the updated attribute value.</span>
+    <span class="k">global</span> <span class="n">last_attitude_cache</span>
+    <span class="c1"># Only publish when value changes</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">!=</span><span class="n">last_attitude_cache</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot; CALLBACK: Attitude changed to&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">last_attitude_cache</span><span class="o">=</span><span class="n">value</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Add `attitude` attribute callback/observer on `vehicle`&quot;</span><span class="p">)</span>     
+<span class="n">vehicle</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;attitude&#39;</span><span class="p">,</span> <span class="n">attitude_callback</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Wait 2s so callback invoked before observer removed&quot;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Remove Vehicle.attitude observer&quot;</span><span class="p">)</span>    
+<span class="c1"># Remove observer added with `add_attribute_listener()` specifying the attribute and callback function</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">remove_attribute_listener</span><span class="p">(</span><span class="s1">&#39;attitude&#39;</span><span class="p">,</span> <span class="n">attitude_callback</span><span class="p">)</span>
+
+
+        
+<span class="c1"># Add mode attribute callback using decorator (callbacks added this way cannot be removed).</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Add `mode` attribute callback/observer using decorator&quot;</span><span class="p">)</span> 
+<span class="nd">@vehicle.on_attribute</span><span class="p">(</span><span class="s1">&#39;mode&#39;</span><span class="p">)</span>   
+<span class="k">def</span> <span class="nf">decorated_mode_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="c1"># `attr_name` is the observed attribute (used if callback is used for multiple attributes)</span>
+    <span class="c1"># `attr_name` - the observed attribute (used if callback is used for multiple attributes)</span>
+    <span class="c1"># `value` is the updated attribute value.</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; CALLBACK: Mode changed to&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Set mode=STABILIZE (currently: </span><span class="si">%s</span><span class="s2">) and wait for callback&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> 
+<span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">VehicleMode</span><span class="p">(</span><span class="s2">&quot;STABILIZE&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Wait 2s so callback invoked before moving to next example&quot;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Attempt to remove observer added with `on_attribute` decorator (should fail)&quot;</span><span class="p">)</span> 
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">vehicle</span><span class="o">.</span><span class="n">remove_attribute_listener</span><span class="p">(</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="n">decorated_mode_callback</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; Exception: Cannot remove observer added using decorator&quot;</span><span class="p">)</span>
+
+
+
+ 
+<span class="c1"># Demonstrate getting callback on any attribute change</span>
+<span class="k">def</span> <span class="nf">wildcard_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; CALLBACK: (</span><span class="si">%s</span><span class="s2">): </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">attr_name</span><span class="p">,</span><span class="n">value</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Add attribute callback detecting ANY attribute change&quot;</span><span class="p">)</span>     
+<span class="n">vehicle</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">wildcard_callback</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Wait 1s so callback invoked before observer removed&quot;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Remove Vehicle attribute observer&quot;</span><span class="p">)</span>    
+<span class="c1"># Remove observer added with `add_attribute_listener()`</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">remove_attribute_listener</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">wildcard_callback</span><span class="p">)</span>
+    
+
+
+<span class="c1"># Get/Set Vehicle Parameters</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Read and write parameters&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Read vehicle param &#39;THR_MIN&#39;: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Write vehicle param &#39;THR_MIN&#39; : 10&quot;</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Read new value of param &#39;THR_MIN&#39;: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">])</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Print all parameters (iterate `vehicle.parameters`):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; Key:</span><span class="si">%s</span><span class="s2"> Value:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">))</span>
+    
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Create parameter observer using decorator&quot;</span><span class="p">)</span>
+<span class="c1"># Parameter string is case-insensitive</span>
+<span class="c1"># Value is cached (listeners are only updated on change)</span>
+<span class="c1"># Observer added using decorator can&#39;t be removed.</span>
+ 
+<span class="nd">@vehicle.parameters.on_attribute</span><span class="p">(</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">)</span>  
+<span class="k">def</span> <span class="nf">decorated_thr_min_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; PARAMETER CALLBACK: </span><span class="si">%s</span><span class="s2"> changed to: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Write vehicle param &#39;THR_MIN&#39; : 20 (and wait for callback)&quot;</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">20</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1">#Callbacks may not be updated for a few seconds</span>
+    <span class="k">if</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">20</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1">#Callback function for &quot;any&quot; parameter</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Create (removable) observer for any parameter using wildcard string&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">any_parameter_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot; ANY PARAMETER CALLBACK: </span><span class="si">%s</span><span class="s2"> changed to: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+<span class="c1">#Add observer for the vehicle&#39;s any/all parameters parameter (defined using wildcard string ``&#39;*&#39;``)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">add_attribute_listener</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">any_parameter_callback</span><span class="p">)</span>     
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot; Change THR_MID and THR_MIN parameters (and wait for callback)&quot;</span><span class="p">)</span>    
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MID&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">400</span>  
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">30</span>
+
+
+<span class="c1">## Reset variables to sensible values.</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Reset vehicle attributes/parameters and exit&quot;</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">VehicleMode</span><span class="p">(</span><span class="s2">&quot;STABILIZE&quot;</span><span class="p">)</span>
+<span class="c1">#vehicle.armed = False</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MIN&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">130</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;THR_MID&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">500</span>
+
+
+<span class="c1">#Close vehicle object before exiting script</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Close vehicle object&quot;</span><span class="p">)</span>
+<span class="n">vehicle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># Shut down simulator if it was started.</span>
+<span class="k">if</span> <span class="n">sitl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">sitl</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Completed&quot;</span><span class="p">)</span>
+
+
+
+
+</pre></div>
+</div>
+</div>
+</div>
+
+
+					<footer id="footer">
+						
+	<div class="footer-buttons" role="navigation" aria-label="footer navigation">
+		
+			<a href="simple_goto.html" class="btn btn-default pull-right" title="Example: Simple Go To (Copter)">
+				Next <span class="fa fa-arrow-circle-right"></span>
+			</a>
+		
+		
+			<a href="running_examples.html" class="btn btn-default" title="Running the Examples">
+				<span class="fa fa-arrow-circle-left"></span> Previous
+			</a>
+		
+	</div>
+
+
+<hr/>
+
+<div role="contentinfo">
+	<p>
+				&copy; Copyright 2015-2016, 3D Robotics.
+	</p>
+</div>
+Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/3drobotics/sphinx_3dr_theme">theme</a> provided by <a href="https://3drobotics.com/">3D Robotics</a> for <a href="http://dronekit.io/">DroneKit</a>.
+					</footer>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+		<script type="text/javascript" src="../_static/js/jquery.js"></script>
+		<script type="text/javascript" src="../_static/js/scroll.js"></script>
+		<script type="text/javascript" src="../_static/underscore.js"></script>
+		<script type="text/javascript" src="../_static/doctools.js"></script>
+		<script type="text/javascript" src="../_static/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../_static/js/cool-select.js"></script>
+		<script type="text/javascript" src="../_static/searchtools.js"></script>
+	
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','../../../../www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-39974306-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+<!-- Mirrored from dronekit-python.readthedocs.io/en/latest/examples/vehicle_state.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Aug 2019 14:26:39 GMT -->
+</html>
